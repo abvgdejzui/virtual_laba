@@ -1,64 +1,80 @@
-import * as THREE from "https://esm.sh/three"; // подключение библиотеки
+import * as THREE from './node_modules/three/build/three.module.min.js';
+import { STLLoader } from './STLLoader.js';
 
-const scene = new THREE.Scene(); // создание сцены
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // создание камеры
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(3, 6, 21);
+camera.rotation.set(0,0,0);
 
-camera.position.set(3, 3, 7); // позиция камеры
-camera.rotation.set(-0.3,0.3,0); // угол наклона камеры
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-const renderer = new THREE.WebGLRenderer(); // создание "отрисовщика"
-renderer.setSize(window.innerWidth, window.innerHeight); // размер отрисовщика
-document.body.appendChild(renderer.domElement); // добавление "отрисовщика"
+const axesHelper = new THREE.AxesHelper(40);
+scene.add(axesHelper);
 
-const axesHelper = new THREE.AxesHelper(20); // создание осей
-scene.add(axesHelper); // добавление их на сцену
+const material = new THREE.MeshPhysicalMaterial({
+    color: 0xff0000,
+    metalness: 0,
+    roughness: 0,
+    opacity: 1,
+    transparent: false,
+    transmission: 0.99,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.25,
+    emissive: 0xff0000
+})
 
-const geometry = new THREE.SphereGeometry(0.5, 32, 16); // создание шара
-const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true }); // создание материала
-const sphere = new THREE.Mesh(geometry, material); // присваивание материала шару
-scene.add(sphere); // добавление шара на сцену
+let mesh;
+
+const loader = new STLLoader();
+loader.load('model.stl', function (geometry){
+    mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+});
     
-let mouseDown = false; // проверка на зажатие левой кнопки мыши
-let mousewheel = false; // проверка на зажатие колёсика мыши
-let prevMousePos = { x: 0, y: 0 }; // коорд. пред. позиции мыши
+let mouseDown = false;
+let mousewheel = false;
+let prevMousePos = { x: 0, y: 0 };
 
 document.addEventListener('mousedown', event => {
-    if (event.button === 0) { // если левая кнопка мыщи сейчас зажата
-        mouseDown = true; // то проверка на зажатие левой кнопки мыши становится верна
+    if (event.button === 0) {
+        mouseDown = true;
     }
-    else if (event.button === 1) { // если колёсико мыши сейчас зажато
-        mousewheel = true; // то проверка на зажатие колёсика мыши становится верна
+    else if (event.button === 1) {
+        mousewheel = true;
     }
 });
 
 document.addEventListener('mouseup', event => {
-    if (event.button === 0) { // если левая кнопка мыщи сейчас НЕ зажата
-        mouseDown = false; // то проверка на зажатие левой кнопки мыши становится НЕверна
+    if (event.button === 0) {
+        mouseDown = false;
     }
-    else if (event.button === 1) { // если колёсико мыши сейчас НЕ зажато
-        mousewheel = false; // то проверка на зажатие колёсика мыши становится НЕверна
+    else if (event.button === 1) {
+        mousewheel = false;
     }
 });
 
 document.addEventListener('mousemove', event => {
-    const deltaMove = { // координаты перемещения мыши
+    const deltaMove = {
         x: event.offsetX - prevMousePos.x,
-        y: event.offsetY - prevMousePos.y
+        y: (event.offsetY - prevMousePos.y) * 1
     };
 
-    if (mouseDown) { // если выполняется проверка на зажатие левой кнопки мыши
-        sphere.position.x += deltaMove.x * 0.01; // то сфера двигается по оси X
-        sphere.position.z += deltaMove.y * 0.01; // то сфера двигается по оси X
+    if (mouseDown) {
+        mesh.position.x += deltaMove.x * 0.05;
+        mesh.position.z += deltaMove.y * 0.05;
     }
 
-    else if (mousewheel) { // если выполняется проверка на зажатие колёсика мыши
-        sphere.rotation.x -= deltaMove.y * 0.01; // то сфера вращается по оси X
-        sphere.rotation.y -= deltaMove.x * 0.01; // то сфера вращается по оси Z
+    else if (mousewheel) {
+        mesh.rotation.x -= (deltaMove.y * 0.05) * -1;
+        mesh.rotation.y -= (deltaMove.x * 0.05) * -1;
     }
-    prevMousePos = { x: event.offsetX, y: event.offsetY }; // координаты мыши после отпускания левой кнопки или колёсика мыши
+    prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
 
-function animate() { // ф-ция анимации всего того что выше
+// Функция анимации
+function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
