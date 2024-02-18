@@ -1,4 +1,4 @@
-import * as THREE from './node_modules/three/build/three.module.min.js';
+import * as THREE from 'node_modules/three/build/three.module.min.js';
 import { STLLoader } from './STLLoader.js';
 
 const scene = new THREE.Scene();
