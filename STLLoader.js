@@ -6,7 +6,7 @@ import {
 	Float32BufferAttribute,
 	Loader,
 	Vector3
-} from './node_modules/three/build/three.module.min.js';
+} from 'https://abvgdejzui.github.io/node_modules/three/build/three.module.min.js';
 
 /**
  * Description: A THREE loader for STL ASCII files, as created by Solidworks and other CAD programs.
