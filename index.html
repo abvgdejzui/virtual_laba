@@ -3,18 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
   <title>3D Sphere Rotation</title>
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-    }
+    
   </style>
 </head>
 <body>
-  <script src="./sphere.js" type="module"></script>
+
+  <div class="container">
+      <div class="column">
+        <button class="custom-btn btn-1">Выход</button>
+          <div id="pokazanie">
+              <h4>Показания</h4>
+              <ol>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <!--<li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li> --->
+              </ol>
+              <button>Скачать файл</button>
+          </div>
+      </div>        
+
+      <div class="column">
+        <h2>Виток с током</h2>
+        <!-- <select id="pvrt">
+          <option value="povorot1">Поворот туда</option>
+          <option value="povorot2">Поворот сюда</option>
+        </select> --> 
+
+        <div>
+          <table>
+            <tr>
+              <td>I витка = ...</td>
+              <td>R витка = ...</td>
+              <td>
+                <button>Изменить</button>
+                <button>Сохранить</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="Pokazatel">
+          <h3> Текущие показатели: </h3>
+          <br>
+          <p id="window">U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111 </p>
+          <br>
+          <div class="form_toggle">
+            <div class="form_toggle-item item-1">
+              <input id="fid-1" type="radio" name="radio" value="off" checked>
+              <label for="fid-1">ВЫКЛ</label>
+            </div>
+            <div class="form_toggle-item item-2">
+              <input id="fid-2" type="radio" name="radio" value="on">
+              <label for="fid-2">ВКЛ</label>
+            </div>
+          </div>
+        </div>
+        <button class="custom-btn btn-2">Записать</button>
+      </div>
+
+  </div>
+  <script src="app.js"></script>
+  <script class="centered-script" src="./sphere.js" type="module"></script>
 </body>
 </html>

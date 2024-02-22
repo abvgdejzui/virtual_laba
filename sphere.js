@@ -1,18 +1,15 @@
 import * as THREE from './build/three.module.js';
 import { STLLoader } from './build/STLLoader.js';
 
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(5, 10, 30);
-camera.rotation.set(0,0,0);
+camera.position.set(-25, 20, 20);
+camera.rotation.set(-0.8,-0.8,-0.8);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
-const axesHelper = new THREE.AxesHelper(40);
-scene.add(axesHelper);
-
 
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
@@ -115,14 +112,25 @@ document.addEventListener('mousemove', event => {
     };
 
     if (mouseDown) {
-        mesh.position.x += deltaMove.x * 0.05;
-        mesh.position.z += deltaMove.y * 0.05;
+        mesh.position.x += deltaMove.x * 0.06;
+        mesh.position.z += deltaMove.y * 0.08;
     }
 
     else if (mousewheel) {
-        mesh.rotation.z -= (deltaMove.x * 0.05) * -1;
+        mesh.rotation.z -= (deltaMove.x * 0.07) * -1;
     }
     prevMousePos = { x: event.offsetX, y: event.offsetY };
+});
+ 
+//доп от настюхи хз надо/нет
+
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById('pvrt');
+
+    selectElement.addEventListener('change', function() {
+        var selectedValue = this.value;
+        console.log('Выбранный вариант: ', selectedValue);
+    });
 });
 
 // Функция анимации
