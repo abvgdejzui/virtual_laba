@@ -6,7 +6,7 @@ canvas {
     top: 50%;
     left: 45%;
     transform: translate(-50%, -50%);
-    border: 0px solid white;
+    border: 5px solid darkslategray;
 }
 
 body{
