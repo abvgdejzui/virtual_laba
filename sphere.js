@@ -112,8 +112,8 @@ document.addEventListener('mousemove', event => {
     };
 
     if (mouseDown) {
-        mesh.position.x += deltaMove.x * 0.06;
-        mesh.position.z += deltaMove.y * 0.08;
+        mesh.position.z += deltaMove.x * 0.06;
+        mesh.position.x += (deltaMove.y * 0.08) *-1;
     }
 
     else if (mousewheel) {
