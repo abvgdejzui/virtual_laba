@@ -142,7 +142,7 @@ td:nth-child(3) {
   }
   .btn-1:hover {
      background: red;
-  background: linear-gradient(0deg, red 0%, red 100%);
+  background: linear-gradient(0deg, darkred 0%, red 100%);
   margin-top: 40%;
   }
 
