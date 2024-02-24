@@ -14,7 +14,7 @@
 
   <div class="container">
       <div class="column">
-        <button class="custom-btn btn-1">Выход</button>
+        <button class="custom-btn btn-1" onclick="exit()">Выход</button>
           <div id="pokazanie">
               <h4>Показания</h4>
               <ol>
@@ -42,11 +42,18 @@
         <div>
           <table>
             <tr>
-              <td>I витка = ...</td>
-              <td>R витка = ...</td>
               <td>
-                <button>Изменить</button>
-                <button>Сохранить</button>
+                I в витке =
+                <input type="number" id="I_vitk" placeholder="Введите I" value="123">
+                А
+              </td>
+              <td>
+                R в витке =
+                <input type="number" id="R_vitk" placeholder="Введите R" value="456">
+                Ом
+              </td>
+              <td>
+                <button onclick="save_IR()">Сохранить</button>
               </td>
             </tr>
           </table>
@@ -57,7 +64,10 @@
         <div class="Pokazatel">
           <h3> Текущие показатели: </h3>
           <br>
-          <p id="window">U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111 </p>
+          <div id="window">
+            <p id="window1">U = 123 В, R = 456 Ом</p>
+            <p id="window2">I = 123 А, f = 111 Вт</p>
+          </div>
           <br>
           <div class="form_toggle">
             <div class="form_toggle-item item-1">
