@@ -31,7 +31,7 @@ loader.load('./models/model.stl', function (geometry){
     scene.add(mesh);
     mesh.rotation.x = -Math.PI / 2;
     mesh.position.x = -5;
-    mesh.position.y = 5;
+    mesh.position.y = 4.8;
 });
 
 
