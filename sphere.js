@@ -26,7 +26,7 @@ const material = new THREE.MeshPhysicalMaterial({
 let mesh;
 const loader = new STLLoader();
 loader.load('./models/model.stl', function (geometry){
-    geometry.scale(0.2,0.2,0.2)
+    geometry.scale(0.1,0.1,0.1)
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
     mesh.rotation.x = -Math.PI / 2;
