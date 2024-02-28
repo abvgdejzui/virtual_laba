@@ -42,10 +42,16 @@ body{
     margin-top: 10%;
 }
 
+#fake-block{
+	width: 100%;
+    	height: 70%;
+}
+
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 60%;
+    margin-top: 40px;
 }
 td {
     border: 3px solid darkslategray;
