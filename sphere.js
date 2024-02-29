@@ -105,7 +105,7 @@ document.addEventListener('keydown', function(event) {
             camera.position.set(-25, 20, 20);
             camera.rotation.set(-0.8, -0.8, -0.8);
         } else {
-            camera.position.set(15, 50, 0);
+            camera.position.set(15, 45, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
         }
         isCameraTransformed = !isCameraTransformed;
