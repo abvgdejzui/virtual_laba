@@ -84,8 +84,11 @@ loader.load('./models/stol.stl', function (geometry){
 
 
 let mouseDown = false;
+let isCameraTransformed = false;
 let mousewheel = false;
 let prevMousePos = { x: 0, y: 0 };
+
+
 
 document.addEventListener('mousedown', event => {
     if (event.button === 0) {
@@ -93,6 +96,19 @@ document.addEventListener('mousedown', event => {
     }
     else if (event.button === 1) {
         mousewheel = true;
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') { 
+        if (isCameraTransformed) {
+            camera.position.set(-25, 20, 20);
+            camera.rotation.set(-0.8, -0.8, -0.8);
+        } else {
+            camera.position.set(15, 50, 0);
+            camera.rotation.set(-Math.PI / 2, 0, 0);
+        }
+        isCameraTransformed = !isCameraTransformed;
     }
 });
 
@@ -111,26 +127,20 @@ document.addEventListener('mousemove', event => {
         y: event.offsetY - prevMousePos.y
     };
 
-    if (mouseDown) {
+    if (mouseDown && !isCameraTransformed) {
         mesh.position.z += deltaMove.x * 0.06;
-        mesh.position.x += (deltaMove.y * 0.08) *-1;
+        mesh.position.x += (deltaMove.y * 0.08) * -1;
+    }
+
+    else if (mouseDown && isCameraTransformed){
+        mesh.position.x += deltaMove.x * 0.06;
+        mesh.position.z += (deltaMove.y * 0.08);
     }
 
     else if (mousewheel) {
         mesh.rotation.z -= (deltaMove.x * 0.07) * -1;
     }
     prevMousePos = { x: event.offsetX, y: event.offsetY };
-});
- 
-//доп от настюхи хз надо/нет
-
-document.addEventListener('DOMContentLoaded', function () {
-    var selectElement = document.getElementById('pvrt');
-
-    selectElement.addEventListener('change', function() {
-        var selectedValue = this.value;
-        console.log('Выбранный вариант: ', selectedValue);
-    });
 });
 
 // Функция анимации
