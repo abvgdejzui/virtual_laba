@@ -28,6 +28,7 @@ const loader = new STLLoader();
 loader.load('./models/model.stl', function (geometry){
     geometry.scale(0.2,0.2,0.2)
     mesh = new THREE.Mesh(geometry, material);
+     meshKrug.position.x = 10;
     scene.add(mesh);
 });
 
