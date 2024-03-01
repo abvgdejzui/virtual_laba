@@ -4,7 +4,7 @@ import { STLLoader } from './build/STLLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(-25, 20, 20);
+camera.position.set(-40, 20, 20);
 camera.rotation.set(-0.8,-0.8,-0.8);
 
 const renderer = new THREE.WebGLRenderer();
@@ -29,9 +29,16 @@ loader.load('./models/model.stl', function (geometry){
     geometry.scale(0.2,0.2,0.2)
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
-    mesh.rotation.x = -Math.PI / 2;
-    mesh.position.x = -5;
 });
+
+function updatePointInFront() {
+    const direction = new THREE.Vector3();
+    const distance = 0.5;
+    mesh.getWorldDirection(direction.set());
+    direction.multiplyScalar(2.5);
+    const point = mesh.position.clone().add(direction);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position);
+}
 
 
 // *** задаю кольцо ***
@@ -52,7 +59,7 @@ loader.load('./models/krug.stl', function (geometry){
     meshKrug = new THREE.Mesh(geometry, materialKrug);
     geometry.scale(0.3,0.3,0.3)
     meshKrug.rotation.x = -Math.PI / 2;
-    meshKrug.position.x = 25;
+    meshKrug.position.x = 0;
     scene.add(meshKrug);
 });
 
@@ -78,10 +85,21 @@ loader.load('./models/stol.stl', function (geometry){
     scene.add(meshStol);
     meshStol.rotation.x = -Math.PI / 2;
     meshStol.position.y = -1;
-    meshStol.position.x = 25;
+    meshStol.position.x = 0;
 })
 
-
+function createCubeAtPoint(point) {
+    // Создаем геометрию куба
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    // Создаем материал для куба
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    // Создаем сам куб
+    const cube = new THREE.Mesh(geometry, material);
+    // Устанавливаем позицию куба на координатах точки
+    cube.position.copy(point);
+    // Добавляем куб на сцену
+    scene.add(cube);
+}
 
 let mouseDown = false;
 let isCameraTransformed = false;
@@ -102,13 +120,23 @@ document.addEventListener('mousedown', event => {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight') { 
         if (isCameraTransformed) {
-            camera.position.set(-25, 20, 20);
+            camera.position.set(-40, 20, 20);
             camera.rotation.set(-0.8, -0.8, -0.8);
         } else {
-            camera.position.set(15, 45, 0);
+            camera.position.set(0, 50, 5);
             camera.rotation.set(-Math.PI / 2, 0, 0);
         }
         isCameraTransformed = !isCameraTransformed;
+    }
+    else if (event.key === 'ArrowLeft') {
+        const direction = new THREE.Vector3();
+        const distance = 0.5;
+        mesh.getWorldDirection(direction.set());
+        direction.multiplyScalar(2.5);
+        const point = mesh.position.clone().add(direction);
+
+        // Создаем куб на координатах точки
+        createCubeAtPoint(point);
     }
 });
 
@@ -138,8 +166,9 @@ document.addEventListener('mousemove', event => {
     }
 
     else if (mousewheel) {
-        mesh.rotation.z -= (deltaMove.x * 0.07) * -1;
+        mesh.rotation.y -= (deltaMove.x * 0.07) * -1;
     }
+    updatePointInFront();
     prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
 
