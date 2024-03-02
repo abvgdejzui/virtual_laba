@@ -4,8 +4,8 @@ import { STLLoader } from './build/STLLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(-40, 20, 20);
-camera.rotation.set(-0.8,-0.8,-0.8);
+camera.position.set(55, 20, 18);
+camera.rotation.set(-0.6,0.8,0.5);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
