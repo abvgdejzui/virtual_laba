@@ -126,10 +126,10 @@ document.addEventListener('mousedown', event => {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight') { 
         if (isCameraTransformed) {
-            camera.position.set(55, 20, 18);
+            camera.position.set(50, 15, 15);
             camera.rotation.set(-0.6,0.8,0.5);
         } else {
-            camera.position.set(30, 40, 0);
+            camera.position.set(30, 30, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
         }
         isCameraTransformed = !isCameraTransformed;
