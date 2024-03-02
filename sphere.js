@@ -65,6 +65,7 @@ loader.load('./models/krug.stl', function (geometry){
     geometry.scale(0.3,0.3,0.3)
     meshKrug.rotation.x = -Math.PI / 2;
     meshKrug.position.x = 0;
+    meshKrug.position.z = 0.5;
     scene.add(meshKrug);
 });
 
