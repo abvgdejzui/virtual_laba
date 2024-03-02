@@ -11,8 +11,6 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-let res1 = (41783 * global_I) / (Math.sqrt(2) * Math.pow(10, 8));
-
 const axesHelper = new THREE.AxesHelper(40);
 scene.add(axesHelper);
 
