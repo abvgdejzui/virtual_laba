@@ -11,6 +11,8 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+let res1 = (41783 * global_I) / (Math.sqrt(2) * Math.pow(10, 8));
+
 const axesHelper = new THREE.AxesHelper(40);
 scene.add(axesHelper);
 
@@ -42,7 +44,7 @@ function updatePointInFront() {
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
     const point = mesh.position.clone().add(direction);
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1);
 }
 
 
@@ -124,7 +126,7 @@ document.addEventListener('mousedown', event => {
 });
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowRight') { 
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft'){ 
         if (isCameraTransformed) {
             camera.position.set(46, 17, 15);
             camera.rotation.set(-0.6,0.8,0.5);
@@ -134,7 +136,8 @@ document.addEventListener('keydown', function(event) {
         }
         isCameraTransformed = !isCameraTransformed;
     }
-    else if (event.key === 'ArrowLeft') {
+    
+    else if (event.key === 'Enter') {
         const direction = new THREE.Vector3();
         const distance = 0.5;
         mesh.getWorldDirection(direction.set());
