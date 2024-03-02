@@ -3,13 +3,17 @@ import { STLLoader } from './build/STLLoader.js';
 
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(55, 20, 18);
 camera.rotation.set(-0.6,0.8,0.5);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+const axesHelper = new THREE.AxesHelper(40);
+scene.add(axesHelper);
+
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -25,8 +29,10 @@ const material = new THREE.MeshPhysicalMaterial({
 let mesh;
 const loader = new STLLoader();
 loader.load('./models/model.stl', function (geometry){
-    geometry.scale(0.2,0.2,0.2)
+    geometry.scale(0.13,0.13,0.13)
     mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = 36;
+    mesh.position.z = 5;
     scene.add(mesh);
 });
 
@@ -36,7 +42,7 @@ function updatePointInFront() {
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
     const point = mesh.position.clone().add(direction);
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position);
 }
 
 
@@ -119,8 +125,8 @@ document.addEventListener('mousedown', event => {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight') { 
         if (isCameraTransformed) {
-            camera.position.set(-40, 20, 20);
-            camera.rotation.set(-0.8, -0.8, -0.8);
+            camera.position.set(55, 20, 18);
+            camera.rotation.set(-0.6,0.8,0.5);
         } else {
             camera.position.set(30, 40, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
@@ -155,8 +161,8 @@ document.addEventListener('mousemove', event => {
     };
 
     if (mouseDown && !isCameraTransformed) {
-        mesh.position.z += deltaMove.x * 0.06;
-        mesh.position.x += (deltaMove.y * 0.08) * -1;
+        mesh.position.z += (deltaMove.x * 0.06) * -1;
+        mesh.position.x += (deltaMove.y * 0.08) * 1;
     }
 
     else if (mouseDown && isCameraTransformed){
