@@ -7,10 +7,11 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.set(-40, 20, 20);
 camera.rotation.set(-0.8,-0.8,-0.8);
 
+let res1 = (41783 * global_I) / (Math.sqrt(2) * Math.pow(10, 8));
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -28,7 +29,6 @@ const loader = new STLLoader();
 loader.load('./models/model.stl', function (geometry){
     geometry.scale(0.2,0.2,0.2)
     mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = -20;
     scene.add(mesh);
 });
 
@@ -38,7 +38,7 @@ function updatePointInFront() {
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
     const point = mesh.position.clone().add(direction);
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1);
 }
 
 
