@@ -8,7 +8,8 @@ function save_IR() {
     var contentElement2 = document.getElementById('window2');
     contentElement2.textContent = 'I = '+ Ivitka + ' А, f = ' + 111 +' Вт'
 }
-
+window.global_I = Ivitka;
+window.global_R = Rvitka;
 function exit() {
     window.location.href = "main.html"; // Замените на URL вашей страницы
 }
