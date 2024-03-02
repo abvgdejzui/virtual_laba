@@ -7,8 +7,6 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.set(-40, 20, 20);
 camera.rotation.set(-0.8,-0.8,-0.8);
 
-let res1 = (41783 * global_I) / (Math.sqrt(2) * Math.pow(10, 8));
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
