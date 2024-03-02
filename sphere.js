@@ -4,7 +4,7 @@ import { STLLoader } from './build/STLLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(55, 20, 18);
+camera.position.set(44, 17, 15);
 camera.rotation.set(-0.6,0.8,0.5);
 
 const renderer = new THREE.WebGLRenderer();
@@ -126,10 +126,10 @@ document.addEventListener('mousedown', event => {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight') { 
         if (isCameraTransformed) {
-            camera.position.set(50, 15, 15);
+            camera.position.set(44, 17, 15);
             camera.rotation.set(-0.6,0.8,0.5);
         } else {
-            camera.position.set(30, 30, 0);
+            camera.position.set(30, 27, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
         }
         isCameraTransformed = !isCameraTransformed;
