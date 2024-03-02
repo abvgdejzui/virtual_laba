@@ -19,5 +19,17 @@ function redirectPrepod() {
 function redirectStudent() {
     window.location.href = "index.html"; // Замените на URL вашей страницы
 }
+// качалка показаний
+function downloadFile() {
 
+    var data = document.querySelector('ol').innerText;
+    var blob = new Blob([data], {type: 'text/plain'});
+    var url = window.URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = 'Показания.txt'; // Имя файла
 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
