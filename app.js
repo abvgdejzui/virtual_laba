@@ -33,3 +33,14 @@ function downloadFile() {
     link.click();
     document.body.removeChild(link);
 }
+
+//exit
+function gotovoExit() {
+    window.location.href = "exit.html"; //переход
+}
+var btn = document.getElementById("gotovo");
+var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+ window.location.href = "main.html"; //переход
+}
