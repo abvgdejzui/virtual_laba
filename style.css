@@ -204,3 +204,19 @@ input[type="number"] {
     background: linear-gradient(0deg, blue 0%, lightseagreen 100%);
     margin:50px
   }
+
+/* exit */
+   .modal-content {
+    background-color: #ffaa4f;
+    margin: 5% auto; /* 5% от верхней части экрана и центрирование */
+    padding: 20px;
+    border: 5px solid #ff6600;
+    width: 40%; /* Ширина модального окна */
+   }
+   
+   .close {
+    color: #ff0000;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+   }
