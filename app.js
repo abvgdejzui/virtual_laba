@@ -44,3 +44,19 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
  window.location.href = "main.html"; //переход
 }
+// пароль для препода
+function redirectPrepod() {
+    document.getElementById('PassPr').style.display = 'block';
+}
+function checkPassword() {
+    let passwordPrepod = document.getElementById('passwordPrepodInput').value;
+    if (passwordPrepod === '12345') { // пароль
+        window.location.href = 'index.html'; //переход
+    } else {
+        alert('Неверный пароль');
+    } 
+}
+
+function closeWindow() {
+    document.getElementById('PassPr').style.display = 'none';
+}
