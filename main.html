@@ -12,6 +12,15 @@
         <button class="custom-btn btn-3" onclick="redirectPrepod()">Войти как преподаватель</button>
         <button class="custom-btn btn-3" onclick="redirectStudent()">Войти как студент</button>
     </div>
+
+    <div id="PassPr" class="PassPr">
+        <div class="PassPr-content">
+            <input type="password" id="passwordPrepodInput" class="PassPr-input" placeholder="Введите пароль">
+            <button class="PassPr-button" onclick="checkPassword()">Отправить</button>
+            <button class="btn-exit" onclick="closeWindow()">X</button>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
