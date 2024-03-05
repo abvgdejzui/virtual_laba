@@ -64,7 +64,6 @@ loader.load('./models/model.stl', function (geometry){
     scene.add(mesh);
 });
 
-
 function updatePointInFront() {
     const direction = new THREE.Vector3();
     const distance = 0.5;
@@ -98,7 +97,6 @@ loader.load('./models/krug.stl', function (geometry){
     scene.add(meshKrug);
 });
 
-
 // *** задаю стол ***
 const materialStol = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -111,7 +109,6 @@ const materialStol = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25,
     emissive: 0xFF8C00,
 })
-
 let meshStol;
 const loaderStol = new STLLoader();
 loader.load('./models/stol.stl', function (geometry){
@@ -121,6 +118,29 @@ loader.load('./models/stol.stl', function (geometry){
     meshStol.rotation.x = -Math.PI / 2;
     meshStol.position.y = -1;
     meshStol.position.x = 0;
+})
+
+// *** задаю оси ***
+const materialOsi = new THREE.MeshPhysicalMaterial({
+    color: 0xFFFFFF,
+    metalness: 1,
+    roughness: 1,
+    opacity: 1,
+    transparent: false,
+    transmission: 0.99,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.25,
+    emissive: 0xFFFFFF,
+})
+let meshOsi;
+const loaderOsi = new STLLoader();
+loader.load('./models/osi.stl', function (geometry){
+    geometry.scale(0.3,0.3,0.3)
+    meshOsi = new THREE.Mesh(geometry, materialOsi);
+    scene.add(meshOsi);
+    meshOsi.rotation.x = -Math.PI / 2;
+    meshOsi.position.y = -0.2;
+    meshOsi.position.z = -0.2;
 })
 
 function createCubeAtPoint(point) {
@@ -140,7 +160,6 @@ let mouseDown = false;
 let isCameraTransformed = false;
 let mousewheel = false;
 let prevMousePos = { x: 0, y: 0 };
-
 
 
 document.addEventListener('mousedown', event => {
