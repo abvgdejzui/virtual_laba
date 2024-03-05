@@ -1,0 +1,46 @@
+body {
+    font-family: "Exo 2", sans-serif;
+
+    background-image: url('pics/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+#login{
+    border: 7px solid #1C2833;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */
+    background-color: #424949 ;
+    color: #F2F3F4;
+    padding: 30px;
+    padding-top: 10px;
+    padding-right: 15px;
+    
+}
+
+#close{
+    float: right;
+    margin: 20px;
+}
+
+#headVhod{
+    text-align: center;
+    font-size: xx-large;
+    margin: 40px;
+    margin-top: 100px
+}
+#knopkiVhod{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+#picsVhod{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
