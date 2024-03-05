@@ -1,6 +1,7 @@
 window.Ivitka = 10; 
 window.Rvitka = 10;
 window.res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
+
 function save_IR() {
     Ivitka = document.getElementById('I_vitk').value;
     res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
@@ -10,15 +11,7 @@ function save_IR() {
     var contentElement2 = document.getElementById('window2');
     contentElement2.textContent = 'E_з = '+ Rvitka + ' мВ, U_k = ' + 10 +' В'
 }
-function exit() {
-    window.location.href = "main.html"; // Замените на URL вашей страницы
-}
-function redirectPrepod() {
-    window.location.href = "index.html"; // Замените на URL вашей страницы
-}
-function redirectStudent() {
-    window.location.href = "index.html"; // Замените на URL вашей страницы
-}
+
 // качалка показаний
 function downloadFile() {
 
@@ -44,19 +37,13 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
  window.location.href = "main.html"; //переход
 }
-// пароль для препода
-function redirectPrepod() {
-    document.getElementById('PassPr').style.display = 'block';
-}
-function checkPassword() {
-    let passwordPrepod = document.getElementById('passwordPrepodInput').value;
-    if (passwordPrepod === '12345') { // пароль
-        window.location.href = 'index.html'; //переход
-    } else {
-        alert('Неверный пароль');
-    } 
-}
 
-function closeWindow() {
-    document.getElementById('PassPr').style.display = 'none';
+function exit() {
+    window.location.href = "main.html"; // Замените на URL вашей страницы
+}
+function redirectPrepod() {
+    window.location.href = "login.html"; // Замените на URL вашей страницы
+}
+function redirectStudent() {
+    window.location.href = "index.html"; // Замените на URL вашей страницы
 }

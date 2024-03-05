@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firebase Authentication</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+</head>
+<body>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signIn()">Sign In</button>
+
+    <script>
+        // Инициализация Firebase
+        const firebaseConfig = {
+          apiKey: "AIzaSyDDpwYn9MjDThXm2eMdO8KTLHzjAde6CA8",
+          authDomain: "phisika-66f26.firebaseapp.com",
+          projectId: "phisika-66f26",
+          storageBucket: "phisika-66f26.appspot.com",
+          messagingSenderId: "1015602422288",
+          appId: "1:1015602422288:web:555945fdd9a97bb3e46095",
+          measurementId: "G-E7J5XD087E"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function signIn() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Успешная аутентификация
+                    var user = userCredential.user;
+                    console.log("Signed in as:", user.email);
+                    // Перенаправление на другую страницу или выполнение других действий
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    // Ошибка аутентификации
+                    alert('Неверный пароль. Попробуйте еще раз.');
+                });
+        }
+    </script>
+</body>
+</html>

@@ -7,6 +7,34 @@ const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerH
 camera.position.set(46, 17, 15);
 camera.rotation.set(-0.6,0.8,0.5);
 
+function cross(a, b) {
+    const ax = a[0],
+      ay = a[1],
+      az = a[2],
+      bx = b[0],
+      by = b[1],
+      bz = b[2];
+  
+    const rx = ay * bz - az * by;
+    const ry = az * bx - ax * bz;
+    const rz = ax * by - ay * bx;
+    return [rx, ry, rz];
+} 
+
+function minus(a, b) {
+    const ax = a[0],
+      ay = a[1],
+      az = a[2],
+      bx = b[0],
+      by = b[1],
+      bz = b[2];
+  
+    const rx = ax - bx;
+    const ry = ay - by;
+    const rz = az - bz;
+    return [rx, ry, rz];
+} 
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -36,15 +64,16 @@ loader.load('./models/model.stl', function (geometry){
     scene.add(mesh);
 });
 
+
 function updatePointInFront() {
     const direction = new THREE.Vector3();
     const distance = 0.5;
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
     const point = mesh.position.clone().add(direction);
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1);
+    var res2 = (cross([30, 0, 0], minus([point.x, point.y, point.z], minus([point.x, point.y, point.z], [30, 0, 0])))) 
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
 }
-
 
 // *** задаю кольцо ***
 const materialKrug = new THREE.MeshPhysicalMaterial({
