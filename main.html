@@ -4,14 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
     <title>Виток с током</title>
 </head>
 <body>
-    <h1 id="headVhod">Виток с током</h1>
+    <h1 id="headVhod">Лабораторная работа "Виток с током"</h1>
+    <div id="picsVhod">
+        <img src="css/pics/prepod.jpg" alt="" style="margin: 80px; margin-bottom: 0px; margin-top: 20px;border: 3px solid #4352D5; border-radius: 5%;" onclick="redirectPrepod()">
+        <img src="css/pics/student.jpg" alt="" style="margin: 80px; margin-bottom: 0px; margin-top: 20px; border: 3px solid #4352D5; border-radius: 5%;" onclick="redirectStudent()">
+    </div>
     <div id="knopkiVhod">
+        
         <button class="custom-btn btn-3" onclick="redirectPrepod()">Войти как преподаватель</button>
+        
         <button class="custom-btn btn-3" onclick="redirectStudent()">Войти как студент</button>
     </div>
+
+    <div id="login" style="display:none" class="modal">
+        <button onclick="closeLogin()" id="close">X</button>
+        <br>
+        <label for="email">Ваша почта:</label>
+        <input type="email" id="email" placeholder="Email">
+        <br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Sign In</button>
+    </div>
+
     <script src="app.js"></script>
+    <script>
+        // Инициализация Firebase
+        const firebaseConfig = {
+          apiKey: "AIzaSyDDpwYn9MjDThXm2eMdO8KTLHzjAde6CA8",
+          authDomain: "phisika-66f26.firebaseapp.com",
+          projectId: "phisika-66f26",
+          storageBucket: "phisika-66f26.appspot.com",
+          messagingSenderId: "1015602422288",
+          appId: "1:1015602422288:web:555945fdd9a97bb3e46095",
+          measurementId: "G-E7J5XD087E"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function signIn() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Успешная аутентификация
+                    var user = userCredential.user;
+                    console.log("Signed in as:", user.email);
+                    // Перенаправление на другую страницу или выполнение других действий
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    // Ошибка аутентификации
+                    alert('Неверный пароль. Попробуйте еще раз.');
+                });
+        }
+    </script>
 </body>
 </html>

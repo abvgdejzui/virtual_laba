@@ -42,8 +42,18 @@ function exit() {
     window.location.href = "main.html"; // Замените на URL вашей страницы
 }
 function redirectPrepod() {
-    window.location.href = "login.html"; // Замените на URL вашей страницы
+    var modal = document.getElementById('login');
+    modal.style.display = 'block';
+    modal.classList.remove('fadeOut');
+    
+    
 }
+function closeLogin(){
+    document.getElementById('login').style.display = 'none';
+}  
+
 function redirectStudent() {
     window.location.href = "index.html"; // Замените на URL вашей страницы
 }
+
+
