@@ -35,11 +35,11 @@ var btn = document.getElementById("gotovo");
 var span = document.getElementsByClassName("close")[0];
 
 span.onclick = function() {
- window.location.href = "main.html"; //переход
+ window.location.href = "index.html"; //переход
 }
 
 function exit() {
-    window.location.href = "main.html"; // Замените на URL вашей страницы
+    window.location.href = "index.html"; // Замените на URL вашей страницы
 }
 function redirectPrepod() {
     var modal = document.getElementById('login');
@@ -53,7 +53,7 @@ function closeLogin(){
 }  
 
 function redirectStudent() {
-    window.location.href = "index.html"; // Замените на URL вашей страницы
+    window.location.href = "main.html"; // Замените на URL вашей страницы
 }
 
 

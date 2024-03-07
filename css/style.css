@@ -188,6 +188,7 @@ input[type="number"] {
     font-weight: 700;
     margin:100px;
     margin-top: 20px;
+    margin-bottom: 20px;
    
   }
   .btn-3:hover {
@@ -195,6 +196,7 @@ input[type="number"] {
     background: linear-gradient(0deg, #4352D5 0%, #8A96FF 100%);
     margin:100px;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 
 /* exit */
