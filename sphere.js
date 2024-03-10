@@ -1,7 +1,7 @@
 import * as THREE from './build/three.module.js';
 import { STLLoader } from './build/STLLoader.js';
 
-
+const loader = new STLLoader();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(46, 17, 15);
@@ -20,10 +20,6 @@ function cross(a, b) {
     const rz = ax * by - ay * bx;
     return [rx, ry, rz];
 } 
-
-function length(x, y, z) {
-    return Math.sqrt(x * x + y * y + z * z);
-}
 
 function minus(a, b) {
     const ax = a[0],
@@ -46,6 +42,29 @@ document.body.appendChild(renderer.domElement);
 const axesHelper = new THREE.AxesHelper(40);
 scene.add(axesHelper);
 
+// *** задаю кольцо ***
+const materialKrug = new THREE.MeshPhysicalMaterial({
+    color: 0xAf1100,
+    metalness: 1,
+    roughness: 1,
+    opacity: 0.6,
+    transparent: true,
+    transmission: 0.99,
+    clearcoat: 0.5,
+    clearcoatRoughness: 0.25,
+    emissive: 0xAf1100
+})
+let meshKrug;
+loader.load('./models/krug.stl', function (geometry){
+    meshKrug = new THREE.Mesh(geometry, materialKrug);
+    geometry.scale(0.3,0.3,0.3)
+    meshKrug.rotation.x = -Math.PI / 2;
+    meshKrug.position.x = 0;
+    meshKrug.position.z = 0.75;
+    scene.add(meshKrug);
+});
+
+
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -58,9 +77,7 @@ const material = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25,
     emissive: 0x696969
 })
-
 let mesh;
-const loader = new STLLoader();
 loader.load('./models/model.stl', function (geometry){
     geometry.scale(0.13,0.13,0.13)
     mesh = new THREE.Mesh(geometry, material);
@@ -74,49 +91,10 @@ function updatePointInFront() {
     const distance = 0.5;
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
-    const n = 100;
-    let s = 0;
     const point = mesh.position.clone().add(direction);
-    for (let i = 0; i < 2 * n; i++){
-        const alpha = Math.PI * i / n;
-        const alpha_next = Math.PI * (i + 1) / n;
-        const m_x = Rvitka * Math.cos(alpha);
-        const m_y = Rvitka * Math.sin(alpha);
-        const m_z = 0;
-        const m_next_x = Rvitka * Math.cos(alpha_next);
-        const m_next_y = Rvitka * Math.sin(alpha_next);
-        const m_next_z = 0;
-        const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
-        const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
-        // s += prod;
-    }
-    var res2 = s * (1 / (2 * n));
+    var res2 = (cross([30, 0, 0], minus([point.x, point.y, point.z], minus([point.x, point.y, point.z], [30, 0, 0])))) 
     console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
 }
-
-// *** задаю кольцо ***
-const materialKrug = new THREE.MeshPhysicalMaterial({
-    color: 0xAf1100,
-    metalness: 1,
-    roughness: 1,
-    opacity: 1,
-    transparent: false,
-    transmission: 0.99,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.25,
-    emissive: 0xAf1100
-})
-let meshKrug;
-const loaderKrug = new STLLoader();
-loader.load('./models/krug.stl', function (geometry){
-    meshKrug = new THREE.Mesh(geometry, materialKrug);
-    geometry.scale(0.3,0.3,0.3)
-    meshKrug.rotation.x = -Math.PI / 2;
-    meshKrug.position.x = 0;
-    meshKrug.position.z = 0.5;
-    scene.add(meshKrug);
-});
 
 // *** задаю стол ***
 const materialStol = new THREE.MeshPhysicalMaterial({
@@ -131,7 +109,6 @@ const materialStol = new THREE.MeshPhysicalMaterial({
     emissive: 0xFF8C00,
 })
 let meshStol;
-const loaderStol = new STLLoader();
 loader.load('./models/stol.stl', function (geometry){
     geometry.scale(0.4,0.4,0.4)
     meshStol = new THREE.Mesh(geometry, materialStol);
@@ -139,6 +116,8 @@ loader.load('./models/stol.stl', function (geometry){
     meshStol.rotation.x = -Math.PI / 2;
     meshStol.position.y = -1;
     meshStol.position.x = 0;
+    meshStol.geometry.computeBoundingBox();
+
 })
 
 // *** задаю оси ***
@@ -154,14 +133,11 @@ const materialOsi = new THREE.MeshPhysicalMaterial({
     emissive: 0xFFFFFF,
 })
 let meshOsi;
-const loaderOsi = new STLLoader();
 loader.load('./models/osi.stl', function (geometry){
     geometry.scale(0.3,0.3,0.3)
     meshOsi = new THREE.Mesh(geometry, materialOsi);
     scene.add(meshOsi);
     meshOsi.rotation.x = -Math.PI / 2;
-    meshOsi.position.y = -0.2;
-    meshOsi.position.z = -0.2;
 })
 
 function createCubeAtPoint(point) {
@@ -176,6 +152,46 @@ function createCubeAtPoint(point) {
     // Добавляем куб на сцену
     scene.add(cube);
 }
+
+
+
+// Создаем верхние вершины
+var topVertices = [    new THREE.Vector3(50, 0, -25),    new THREE.Vector3(50, 0, 25)];
+
+// Создаем нижние вершины
+var bottomVertices = [    new THREE.Vector3(-50, 0, 25),    new THREE.Vector3(-50, 0, -25)];
+
+// Создаем сегменты
+var geometrySetka = new THREE.BufferGeometry();
+const points = [];
+
+// Делим верхнюю и нижнюю сетки на 50 сегментов
+const numSegments = 25;
+const segmentLength = 50 / numSegments;
+for (let i = 0; i <= numSegments; i++) {
+    points.push(new THREE.Vector3(50 - (i * segmentLength), 0, -25));
+    points.push(new THREE.Vector3(50 - (i * segmentLength), 0, 25));
+    points.push(new THREE.Vector3(-50 + (i * segmentLength), 0, 25));
+    points.push(new THREE.Vector3(-50 + (i * segmentLength), 0, -25));
+    points.push(new THREE.Vector3(50 - (i * segmentLength), 0, -25));
+}
+
+// Создаем вертикальные сегменты
+const numVertSegments = 30;
+const vertSegmentLength = 50 / numVertSegments;
+for (let i = 0; i < numVertSegments; i++) {
+    points.push(new THREE.Vector3(50, 0, 25 - (i * vertSegmentLength)));
+    points.push(new THREE.Vector3(-50, 0, 25 - (i * vertSegmentLength)));
+    points.push(new THREE.Vector3(50, 0, 25 - (i * vertSegmentLength)));
+}
+
+geometrySetka.setFromPoints(points);
+
+var materialSetka = new THREE.LineBasicMaterial({ color: 0x8B4513 });
+var line = new THREE.Line(geometrySetka, materialSetka);
+scene.add(line);
+
+
 
 let mouseDown = false;
 let isCameraTransformed = false;
@@ -198,7 +214,7 @@ document.addEventListener('keydown', function(event) {
             camera.position.set(46, 17, 15);
             camera.rotation.set(-0.6,0.8,0.5);
         } else {
-            camera.position.set(30, 27, 0);
+            camera.position.set(30, 20, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
         }
         isCameraTransformed = !isCameraTransformed;
