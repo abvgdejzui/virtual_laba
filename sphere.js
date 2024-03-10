@@ -20,7 +20,9 @@ function cross(a, b) {
     const rz = ax * by - ay * bx;
     return [rx, ry, rz];
 } 
-
+function length(x, y, z) {
+    return Math.sqrt(x * x + y * y + z * z);
+}
 function minus(a, b) {
     const ax = a[0],
       ay = a[1],
@@ -43,11 +45,11 @@ const axesHelper = new THREE.AxesHelper(40);
 scene.add(axesHelper);
 
 // *** задаю кольцо ***
-const materialKrug = new THREE.MeshPhysicalMaterial({
+var materialKrug = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
     metalness: 1,
     roughness: 1,
-    opacity: 0.6,
+    opacity: 0.9,
     transparent: true,
     transmission: 0.99,
     clearcoat: 0.5,
@@ -61,6 +63,7 @@ loader.load('./models/krug.stl', function (geometry){
     meshKrug.rotation.x = -Math.PI / 2;
     meshKrug.position.x = 0;
     meshKrug.position.z = 0.75;
+    meshKrug.renderOrder = 1;
     scene.add(meshKrug);
 });
 
@@ -70,7 +73,6 @@ const material = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
     metalness: 1,
     roughness: 1,
-    opacity: 1,
     transparent: false,
     transmission: 0.99,
     clearcoat: 1.0,
@@ -91,8 +93,24 @@ function updatePointInFront() {
     const distance = 0.5;
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
+    const n = 100;
+    let s = 0;
     const point = mesh.position.clone().add(direction);
-    var res2 = (cross([30, 0, 0], minus([point.x, point.y, point.z], minus([point.x, point.y, point.z], [30, 0, 0])))) 
+    for (let i = 0; i < 2 * n; i++){
+        const alpha = Math.PI * i / n;
+        const alpha_next = Math.PI * (i + 1) / n;
+        const m_x = Rvitka * Math.cos(alpha);
+        const m_y = Rvitka * Math.sin(alpha);
+        const m_z = 0;
+        const m_next_x = Rvitka * Math.cos(alpha_next);
+        const m_next_y = Rvitka * Math.sin(alpha_next);
+        const m_next_z = 0;
+        const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
+        const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
+        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
+        // s += prod;
+    }
+    var res2 = s * (1 / (2 * n));
     console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
 }
 
@@ -213,11 +231,14 @@ document.addEventListener('keydown', function(event) {
         if (isCameraTransformed) {
             camera.position.set(46, 17, 15);
             camera.rotation.set(-0.6,0.8,0.5);
+            materialKrug.opacity = 0.9;
         } else {
             camera.position.set(30, 20, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
+            materialKrug.opacity = 0.5;
         }
         isCameraTransformed = !isCameraTransformed;
+        materialKrug.needsUpdate = true; // Обновляем материал
     }
     
     else if (event.key === 'Enter') {
@@ -231,6 +252,7 @@ document.addEventListener('keydown', function(event) {
         createCubeAtPoint(point);
     }
 });
+
 
 document.addEventListener('mouseup', event => {
     if (event.button === 0) {
