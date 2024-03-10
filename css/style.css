@@ -14,22 +14,21 @@ body{
     background: black;
 }
 
+
+/* колонки/контейнеры */
 .container {
     display: flex;
     margin-left: 1px;
     margin-right: 1px;
 }
-
 .column {
     flex: 1;
     border: 0px solid lawngreen;
     padding: 10px;
 }
-
 .column:first-child{
     flex: 0 0 12%;
 }
-
 .column:nth-child(2){
     flex: 0 0 61%;
 }
@@ -43,7 +42,7 @@ body{
 }
 
 
-
+/* нижняя табличка для I R */
 table {
     width: 60% ;
     height: 5% ;
@@ -58,11 +57,18 @@ td {
     color: midnightblue;
     padding: 10px;
 }
-
 td:nth-child(3) {
     width: 20%
 }
 
+input[type="number"] {
+    width:  80px;
+     /* Устанавливаем высоту поля ввода */
+    font-size:  14px; /* Устанавливаем размер шрифта */
+    text-align: center;
+}
+
+/* Окошко в правом столбце */
 .Pokazatel {
     font-size: larger;
     border: 7px ridge dimgray;
@@ -81,13 +87,8 @@ td:nth-child(3) {
 
 
 
-input[type="number"] {
-    width:  80px;
-     /* Устанавливаем высоту поля ввода */
-    font-size:  14px; /* Устанавливаем размер шрифта */
-    text-align: center;
-}
 
+/* Рубильник он-офф */
 .form_toggle {
 	display: inline-block;
 	overflow: hidden;
@@ -117,7 +118,6 @@ input[type="number"] {
 	border-right: 1px solid #999;
     background: darkred;
 }
- 
 /* Checked */
 .form_toggle .item-1 input[type=radio]:checked + label {
 	background: red;
@@ -127,7 +127,7 @@ input[type="number"] {
 }
 
 
-
+/* КНОПКИ */
 .custom-btn {
     width: 130px;
     height: 40px;

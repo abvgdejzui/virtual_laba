@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
   <title>3D Sphere Rotation</title>
   <style>
     
@@ -21,19 +22,19 @@
                   <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
                   <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
                   <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
-                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
+                  <!-- <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li> -->
               </ol>
                <button onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
           </div>
       </div>        
 
       <div class="column">
-        <h2>Виток с током</h2>
-        <!-- <select id="pvrt">
-          <option value="povorot1">Поворот туда</option>
-          <option value="povorot2">Поворот сюда</option>
-        </select> --> 
-        
+        <header>
+          <span id="header">Виток с током</span>
+          <span id="info">Информация об установке</span>
+        </header>
+
+
         <div>
           <table>
             <tr>
@@ -43,7 +44,7 @@
                 А
               </td>
               <td>
-                R в витке =
+                R витка =
                 <input type="number" id="R_vitk" placeholder="Введите R" value="456">
                 см
               </td>
@@ -56,12 +57,29 @@
       </div>
 
       <div class="column">
+        <div class="coords">
+          <p>Координаты датчика:</p>
+          <p> X: <span id="X-coord">0.000</span> <br>
+            Y: <span id="Y-coord">0.000</span> <br>
+            
+          </p>
+        </div>
+
         <div class="Pokazatel">
           <h3> Текущие показатели: </h3>
           <br>
           <div id="window">
-            <p id="window1">f_k = 1 кГц, I_k = 123 мА</p>
-            <p id="window2">E_з = 456 мВ, U_k = 10 В</p>
+            <p>
+              f<sub>k</sub> = <span id="Fk">1</span> кГц
+              &nbsp;&nbsp;&nbsp;
+              I<sub>k</sub> = <span id="Ik">123</span> мА
+            </p>
+
+            <p>
+              E<sub>з</sub> = <span id="Ez">0.36</span> мВ
+              &nbsp;&nbsp;
+              U<sub>k</sub> = <span id="Uk">456</span> В
+            </p>
           </div>
           <br>
           <div class="form_toggle">

@@ -6,6 +6,7 @@ body {
     background-size: cover;
  }
 #login{
+    display:none;
     border: 7px solid #1C2833;
     position: absolute;
     top: 50%;
@@ -17,6 +18,18 @@ body {
     padding-top: 10px;
     padding-right: 15px;
     
+}
+
+.modalFon {
+    display: none; /* По умолчанию фон скрыт */
+    position: fixed; /* Фиксированное позиционирование */
+    z-index: 0; /* Фон будет под модальным окном */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Добавляет прокрутку, если контент превышает высоту экрана */
+    background-color: rgba(0,0,0,0.65); /* Черный фон с прозрачностью */
 }
 
 #close{

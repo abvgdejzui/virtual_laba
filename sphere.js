@@ -112,6 +112,13 @@ function updatePointInFront() {
     }
     var res2 = s * (1 / (2 * n));
     console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
+    
+
+    var XCoord = document.getElementById('X-coord');
+    XCoord.textContent = (point.x).toFixed(3)
+    var YCoord = document.getElementById('Y-coord');
+    YCoord.textContent = (point.z).toFixed(3)
+   
 }
 
 // *** задаю стол ***

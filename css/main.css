@@ -1,0 +1,29 @@
+body {
+    font-family: "Exo 2", sans-serif;
+    background-image: url('pics/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+ canvas {
+    display: block;
+    width: 60% !important;
+    height: 70% !important;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    border: 5px solid darkslategray;
+}
+
+ .coords {
+    margin: 10px;
+    text-align: right;
+ }
+
+#header{
+    font-size: x-large;
+ }
+ #info {
+    margin-left: 50%;
+ }

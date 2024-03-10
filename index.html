@@ -25,7 +25,9 @@
         <button class="custom-btn btn-3" onclick="redirectStudent()">Войти как студент</button>
     </div>
 
-    <div id="login" style="display:none" class="modal">
+
+    <div id="modalBackground" class="modalFon"></div>
+    <div id="login"  class="modal">
         <button onclick="closeLogin()" id="close">X</button>
         <br>
         <label for="email">Ваша почта:</label>
@@ -33,7 +35,7 @@
         <br>
         <label for="password">Пароль:</label>
         <input type="password" id="password" placeholder="Password">
-        <button onclick="signIn()">Sign In</button>
+        <button onclick="signIn()">Войти</button>
     </div>
 
     <script src="app.js"></script>
