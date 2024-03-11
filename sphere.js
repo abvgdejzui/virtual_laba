@@ -4,7 +4,7 @@ import { STLLoader } from './build/STLLoader.js';
 const loader = new STLLoader();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(46, 17, 15);
+camera.position.set(42, 14, 10);
 camera.rotation.set(-0.6,0.8,0.5);
 
 const renderer = new THREE.WebGLRenderer();
@@ -38,63 +38,6 @@ loader.load('./models/krug.stl', function (geometry){
     scene.add(meshKrug);
 });
 
-<<<<<<< HEAD
-
-// *** задаю датчик ***
-const material = new THREE.MeshPhysicalMaterial({
-    color: 0xAf1100,
-    metalness: 1,
-    roughness: 1,
-    transparent: false,
-    transmission: 0.99,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.25,
-    emissive: 0x696969
-})
-let mesh;
-loader.load('./models/model.stl', function (geometry){
-    geometry.scale(0.13,0.13,0.13)
-    mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = 36;
-    mesh.position.z = 5;
-    scene.add(mesh);
-});
-
-function updatePointInFront() {
-    const direction = new THREE.Vector3();
-    const distance = 0.5;
-    mesh.getWorldDirection(direction.set());
-    direction.multiplyScalar(2.5);
-    const n = 100;
-    let s = 0;
-    const point = mesh.position.clone().add(direction);
-    for (let i = 0; i < 2 * n; i++){
-        const alpha = Math.PI * i / n;
-        const alpha_next = Math.PI * (i + 1) / n;
-        const m_x = Rvitka * Math.cos(alpha);
-        const m_y = Rvitka * Math.sin(alpha);
-        const m_z = 0;
-        const m_next_x = Rvitka * Math.cos(alpha_next);
-        const m_next_y = Rvitka * Math.sin(alpha_next);
-        const m_next_z = 0;
-        const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
-        const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
-        // s += prod;
-    }
-    var res2 = s * (1 / (2 * n));
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
-    
-
-    var XCoord = document.getElementById('X-coord');
-    XCoord.textContent = (mesh.position.x).toFixed(3)
-    var YCoord = document.getElementById('Y-coord');
-    YCoord.textContent = (mesh.position.z).toFixed(3)
-   
-}
-
-=======
->>>>>>> 4f2fdd08267faf11cdced6d5d3b0eaefe2f50518
 // *** задаю стол ***
 const materialStol = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -152,16 +95,16 @@ const material = new THREE.MeshPhysicalMaterial({
 })
 let mesh;
 loader.load('./models/model.stl', function (geometry){
-    geometry.scale(0.13,0.13,0.13)
+    geometry.scale(0.1,0.1,0.1)
     mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = 36;
-    mesh.position.z = 5;
+    mesh.position.x = 35;
+    mesh.position.z = -4;
     scene.add(mesh);
 });
 
 function createCubeAtPoint(point) {
     // Создаем геометрию куба
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
     // Создаем материал для куба
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     // Создаем сам куб
@@ -206,7 +149,6 @@ function minus(a, b) {
 
 function updatePointInFront() {
     const direction = new THREE.Vector3();
-    const distance = 0.5;
     mesh.getWorldDirection(direction.set());
     direction.multiplyScalar(2.5);
     const n = 100;
@@ -223,12 +165,11 @@ function updatePointInFront() {
         const m_next_z = 0;
         const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
         const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-        var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
-        prod = length(prod[0], prod[1], prod[2]) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
-        s += prod;   
+        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
+        // s += prod;
     }
     var res2 = s * (1 / (2 * n));
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1 * res2);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,7 +185,7 @@ var geometrySetka = new THREE.BufferGeometry();
 const points = [];
 
 // Делим верхнюю и нижнюю сетки на 50 сегментов
-const numSegments = 25;
+const numSegments = 50;
 const segmentLength = 50 / numSegments;
 for (let i = 0; i <= numSegments; i++) {
     points.push(new THREE.Vector3(50 - (i * segmentLength), 0, -25));
@@ -255,7 +196,7 @@ for (let i = 0; i <= numSegments; i++) {
 }
 
 // Создаем вертикальные сегменты
-const numVertSegments = 30;
+const numVertSegments = 60;
 const vertSegmentLength = 50 / numVertSegments;
 for (let i = 0; i < numVertSegments; i++) {
     points.push(new THREE.Vector3(50, 0, 25 - (i * vertSegmentLength)));
@@ -292,7 +233,7 @@ document.addEventListener('keydown', function(event) {
             camera.rotation.set(-0.6,0.8,0.5);
             materialKrug.opacity = 0.9;
         } else {
-            camera.position.set(30, 20, 0);
+            camera.position.set(30, 15, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
             materialKrug.opacity = 0.5;
         }
@@ -385,4 +326,3 @@ function animate() {
 }
 
 animate();
-
