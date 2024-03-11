@@ -13,17 +13,28 @@
 </head>
 <body>
   <script src="app.js"></script>
+  
+
+  <div id="info-back"></div>
+  <div id="info-modal">
+    
+    <div id="info-text">
+      <button onclick="closeInfo()">X</button>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis corporis voluptatibus non exercitationem fugit! Vitae, sit aliquid alias laudantium veniam obcaecati excepturi eos corrupti, quam laborum necessitatibus aliquam optio voluptate iste hic a, est libero autem molestiae eaque culpa maxime.</p>
+    </div>
+  </div>
+
   <div class="container">
       <div class="column">
         <button class="custom-btn btn-1" onclick="exit()">Выход</button>
           <div id="pokazanie">
-              <h4>Показания</h4>
-              <ol>
-                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
-                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
-                  <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li>
-                  <!-- <li>Показание <br> U = 123 &nbsp; R = 456 <br> G  = 789 &nbsp; V = 111</li> -->
-              </ol>
+              <p id="pokazanieHead">Показания</p>
+              <div id="pokazanieText">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam tempora fugiat numquam eum! Nobis modi, laboriosam quod vel dignissimos quisquam odio beatae reiciendis libero aliquid dicta minima expedita voluptates repudiandae explicabo culpa esse. Molestiae, ea quisquam ab in ducimus velit?
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam tempora fugiat numquam eum! Nobis modi, laboriosam quod vel dignissimos quisquam odio beatae reiciendis libero aliquid dicta minima expedita voluptates repudiandae explicabo culpa esse. Molestiae, ea quisquam ab in ducimus velit?
+                </p>
+              </div>
+              
                <button onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
           </div>
       </div>        
@@ -31,7 +42,7 @@
       <div class="column">
         <header>
           <span id="header">Виток с током</span>
-          <span id="info">Информация об установке</span>
+          <span id="info"><button onclick="getInfo()">Информация об установке</button></span>
         </header>
 
 

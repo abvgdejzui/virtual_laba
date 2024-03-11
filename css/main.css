@@ -11,7 +11,7 @@ body {
     height: 70% !important;
     position: absolute;
     top: 50%;
-    left: 45%;
+    left: 46%;
     transform: translate(-50%, -50%);
     border: 5px solid darkslategray;
 }
@@ -27,3 +27,52 @@ body {
  #info {
     margin-left: 50%;
  }
+
+ #pokazanie{
+    background-image: url('pics/note.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: 0px solid gray;
+    color: darkblue;
+    margin: 5px;
+    margin-right: 0px;
+    padding-top: 100px;
+    padding: 8px;
+    padding-right: 1px;
+    margin-top: 10px;
+
+    
+}
+#pokazanieHead{
+    margin-top:40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#pokazanieText{
+    max-height: 350px; /* Устанавливает максимальную высоту блока */
+    overflow: auto; /* Добавляет полосы прокрутки, если содержимое блока превышает его высоту */
+    padding-right: 5px;
+}
+
+#info-modal{
+    display: none;
+    position: absolute;
+    background-color: aqua;
+    color: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирует модальное окно */
+    z-index: 1000; /* Устанавливает высокое значение z-index, чтобы модальное окно было поверх всех других элементов */
+    padding: 10px;
+}
+#info-back {
+    display: none; /* По умолчанию фон скрыт */
+    position: absolute;
+    z-index: 999; /* Фиксированное позиционирование */
+     /* Фон будет под модальным окном */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Добавляет прокрутку, если контент превышает высоту экрана */
+    background-color: rgba(0,0,0,0.65); /* Черный фон с прозрачностью */
+}

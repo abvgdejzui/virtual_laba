@@ -49,40 +49,25 @@ function exit() {
     window.location.href = "index.html"; 
 }
 
-
-function redirectPrepod() { //виджет по кнопке
-    document.getElementById('login').style.display = 'block';
-    document.getElementById('modalBackground').style.display = 'block';
+function getInfo() {
+    document.getElementById('info-modal').style.display = 'block';
+    document.getElementById('info-back').style.display = 'block';
 }
-function closeLogin(){
-    document.getElementById('login').style.display = 'none';  
-    document.getElementById('modalBackground').style.display = 'none';
+function closeInfo(){
+    document.getElementById('info-modal').style.display = 'none';  
+    document.getElementById('info-back').style.display = 'none';
 }   
 
-var modalBackground = document.getElementById("modalBackground");
-var modal = document.getElementById("login");
-modalBackground.onclick = function()  {
-    document.getElementById('login').style.display = 'none';  
-    document.getElementById('modalBackground').style.display = 'none';
-}
-document.getElementById('login').addEventListener('click', function(event) {
-    event.stopPropagation(); // Предотвращает всплытие события
-});
+var infoBack = document.getElementById("info-back");
+var infoModal = document.getElementById("info-modal");
 
-
-function redirectStudent() {
-    window.location.href = "main.html"; // Замените на URL вашей страницы
-}
-
-
-
-var btn = document.getElementById("openModal");
-var span = document.getElementById("closeModal");
-
-// Когда пользователь нажимает в любом месте за пределами модального окна, закрываем его
-window.onclick = function(event) {
-    if (event.target == document.getElementById('login')) {
-        document.getElementById('login').style.display = 'none';
+infoBack.onclick = function(event) {
+    // Проверяем, было ли событие инициировано внутри модального окна
+    if (event.target === infoModal) {
+        // Если событие было инициировано внутри модального окна, не делаем ничего
+        return;
     }
+    // Если событие было инициировано вне модального окна, закрываем модальное окно и фон
+    document.getElementById('info-back').style.display = 'none';  
+    document.getElementById('info-modal').style.display = 'none';
 }
-
