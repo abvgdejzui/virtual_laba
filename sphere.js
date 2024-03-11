@@ -3,16 +3,13 @@ import { STLLoader } from './build/STLLoader.js';
 
 const loader = new STLLoader();
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(42, 14, 10);
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(50, 14, 12);
 camera.rotation.set(-0.6,0.8,0.5);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
-const axesHelper = new THREE.AxesHelper(40);
-scene.add(axesHelper);
 
 /////////////////////////////////////////////////////////////
 
@@ -150,7 +147,7 @@ function minus(a, b) {
 function updatePointInFront() {
     const direction = new THREE.Vector3();
     mesh.getWorldDirection(direction.set());
-    direction.multiplyScalar(2.5);
+    direction.multiplyScalar(1.5);
     const n = 100;
     let s = 0;
     const point = mesh.position.clone().add(direction);
@@ -195,7 +192,7 @@ for (let i = 0; i <= numSegments; i++) {
 }
 
 // Создаем вертикальные сегменты
-const numVertSegments = 60;
+const numVertSegments = 50;
 const vertSegmentLength = 50 / numVertSegments;
 for (let i = 0; i < numVertSegments; i++) {
     points.push(new THREE.Vector3(50, 0, 25 - (i * vertSegmentLength)));
@@ -228,11 +225,11 @@ document.addEventListener('mousedown', event => {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft'){ 
         if (isCameraTransformed) {
-            camera.position.set(46, 17, 15);
+            camera.position.set(50, 14, 12);
             camera.rotation.set(-0.6,0.8,0.5);
             materialKrug.opacity = 0.9;
         } else {
-            camera.position.set(30, 15, 0);
+            camera.position.set(30, 25, 0);
             camera.rotation.set(-Math.PI / 2, 0, 0);
             materialKrug.opacity = 0.5;
         }
@@ -315,8 +312,6 @@ document.addEventListener('mousemove', (event) => {
     document.body.style.cursor = 'auto';
   }
 });
-
-
 
 // Функция анимации
 function animate() {
