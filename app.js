@@ -58,16 +58,19 @@ function closeInfo(){
     document.getElementById('info-back').style.display = 'none';
 }   
 
-var infoBack = document.getElementById("info-back");
-var infoModal = document.getElementById("info-modal");
+document.addEventListener('DOMContentLoaded', function() {
+	var infoBack = document.getElementById("info-back");
+	console.log(infoBack);
+	var infoModal = document.getElementById("info-modal");
 
-infoBack.onclick = function(event) {
-    // Проверяем, было ли событие инициировано внутри модального окна
-    if (event.target === infoModal) {
-        // Если событие было инициировано внутри модального окна, не делаем ничего
-        return;
-    }
-    // Если событие было инициировано вне модального окна, закрываем модальное окно и фон
-    document.getElementById('info-back').style.display = 'none';  
-    document.getElementById('info-modal').style.display = 'none';
-}
+	infoBack.onclick = function(event) {
+		// Проверяем, было ли событие инициировано внутри модального окна
+		if (event.target === infoModal) {
+			// Если событие было инициировано внутри модального окна, не делаем ничего
+			return;
+		}
+		// Если событие было инициировано вне модального окна, закрываем модальное окно и фон
+		document.getElementById('info-back').style.display = 'none';  
+		document.getElementById('info-modal').style.display = 'none';
+	}
+}, false);
