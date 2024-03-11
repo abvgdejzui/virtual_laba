@@ -179,12 +179,6 @@ function updatePointInFront() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Создаем верхние вершины
-var topVertices = [    new THREE.Vector3(50, 0, -25),    new THREE.Vector3(50, 0, 25)];
-
-// Создаем нижние вершины
-var bottomVertices = [    new THREE.Vector3(-50, 0, 25),    new THREE.Vector3(-50, 0, -25)];
-
 // Создаем сегменты
 var geometrySetka = new THREE.BufferGeometry();
 const points = [];
@@ -250,7 +244,7 @@ document.addEventListener('keydown', function(event) {
         const direction = new THREE.Vector3();
         const distance = 0.5;
         mesh.getWorldDirection(direction.set());
-        direction.multiplyScalar(2.5);
+        direction.multiplyScalar(1.5);
         const point = mesh.position.clone().add(direction);
 
         // Создаем куб на координатах точки
