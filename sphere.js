@@ -166,11 +166,12 @@ function updatePointInFront() {
         const m_next_z = 0;
         const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
         const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
-        // s += prod;
+        var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
+        prod = length(prod[0], prod[1], prod[2]) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
+        s += prod;   
     }
     var res2 = s * (1 / (2 * n));
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1 * res2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
