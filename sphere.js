@@ -7,42 +7,14 @@ const camera = new THREE.PerspectiveCamera(71, window.innerWidth / window.innerH
 camera.position.set(46, 17, 15);
 camera.rotation.set(-0.6,0.8,0.5);
 
-function cross(a, b) {
-    const ax = a[0],
-      ay = a[1],
-      az = a[2],
-      bx = b[0],
-      by = b[1],
-      bz = b[2];
-  
-    const rx = ay * bz - az * by;
-    const ry = az * bx - ax * bz;
-    const rz = ax * by - ay * bx;
-    return [rx, ry, rz];
-} 
-function length(x, y, z) {
-    return Math.sqrt(x * x + y * y + z * z);
-}
-function minus(a, b) {
-    const ax = a[0],
-      ay = a[1],
-      az = a[2],
-      bx = b[0],
-      by = b[1],
-      bz = b[2];
-  
-    const rx = ax - bx;
-    const ry = ay - by;
-    const rz = az - bz;
-    return [rx, ry, rz];
-} 
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const axesHelper = new THREE.AxesHelper(40);
 scene.add(axesHelper);
+
+/////////////////////////////////////////////////////////////
 
 // *** задаю кольцо ***
 var materialKrug = new THREE.MeshPhysicalMaterial({
@@ -61,12 +33,12 @@ loader.load('./models/krug.stl', function (geometry){
     meshKrug = new THREE.Mesh(geometry, materialKrug);
     geometry.scale(0.3,0.3,0.3)
     meshKrug.rotation.x = -Math.PI / 2;
-    meshKrug.position.x = 0;
     meshKrug.position.z = 0.75;
     meshKrug.renderOrder = 1;
     scene.add(meshKrug);
 });
 
+<<<<<<< HEAD
 
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
@@ -121,6 +93,8 @@ function updatePointInFront() {
    
 }
 
+=======
+>>>>>>> 4f2fdd08267faf11cdced6d5d3b0eaefe2f50518
 // *** задаю стол ***
 const materialStol = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
@@ -165,6 +139,26 @@ loader.load('./models/osi.stl', function (geometry){
     meshOsi.rotation.x = -Math.PI / 2;
 })
 
+// *** задаю датчик ***
+const material = new THREE.MeshPhysicalMaterial({
+    color: 0xAf1100,
+    metalness: 1,
+    roughness: 1,
+    transparent: false,
+    transmission: 0.99,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.25,
+    emissive: 0x696969
+})
+let mesh;
+loader.load('./models/model.stl', function (geometry){
+    geometry.scale(0.13,0.13,0.13)
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = 36;
+    mesh.position.z = 5;
+    scene.add(mesh);
+});
+
 function createCubeAtPoint(point) {
     // Создаем геометрию куба
     const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -178,7 +172,66 @@ function createCubeAtPoint(point) {
     scene.add(cube);
 }
 
+///////////////////////////////////////////////////////////////////////
 
+function cross(a, b) {
+    const ax = a[0],
+      ay = a[1],
+      az = a[2],
+      bx = b[0],
+      by = b[1],
+      bz = b[2];
+  
+    const rx = ay * bz - az * by;
+    const ry = az * bx - ax * bz;
+    const rz = ax * by - ay * bx;
+    return [rx, ry, rz];
+} 
+function length(x, y, z) {
+    return Math.sqrt(x * x + y * y + z * z);
+}
+function minus(a, b) {
+    const ax = a[0],
+      ay = a[1],
+      az = a[2],
+      bx = b[0],
+      by = b[1],
+      bz = b[2];
+  
+    const rx = ax - bx;
+    const ry = ay - by;
+    const rz = az - bz;
+    return [rx, ry, rz];
+} 
+
+function updatePointInFront() {
+    const direction = new THREE.Vector3();
+    const distance = 0.5;
+    mesh.getWorldDirection(direction.set());
+    direction.multiplyScalar(2.5);
+    const n = 100;
+    let s = 0;
+    const point = mesh.position.clone().add(direction);
+    for (let i = 0; i < 2 * n; i++){
+        const alpha = Math.PI * i / n;
+        const alpha_next = Math.PI * (i + 1) / n;
+        const m_x = Rvitka * Math.cos(alpha);
+        const m_y = Rvitka * Math.sin(alpha);
+        const m_z = 0;
+        const m_next_x = Rvitka * Math.cos(alpha_next);
+        const m_next_y = Rvitka * Math.sin(alpha_next);
+        const m_next_z = 0;
+        const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
+        const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
+        var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
+        prod = length(prod[0], prod[1], prod[2]) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
+        s += prod;   
+    }
+    var res2 = s * (1 / (2 * n));
+    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1 * res2);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Создаем верхние вершины
 var topVertices = [    new THREE.Vector3(50, 0, -25),    new THREE.Vector3(50, 0, 25)];
@@ -216,13 +269,12 @@ var materialSetka = new THREE.LineBasicMaterial({ color: 0x8B4513 });
 var line = new THREE.Line(geometrySetka, materialSetka);
 scene.add(line);
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 let mouseDown = false;
 let isCameraTransformed = false;
 let mousewheel = false;
 let prevMousePos = { x: 0, y: 0 };
-
 
 document.addEventListener('mousedown', event => {
     if (event.button === 0) {
@@ -293,6 +345,39 @@ document.addEventListener('mousemove', event => {
     prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
 
+
+
+
+const sphereElement = document.querySelector('.centered-script');
+
+// Устанавливаем для элемента sphereElement стиль pointer-events: none;
+sphereElement.style.pointerEvents = 'none';
+
+// Добавляем прослушиватель событий mousemove к документу
+document.addEventListener('mousemove', (event) => {
+  // Проверяем, находится ли курсор мыши за пределами элемента sphereElement
+  const rect = sphereElement.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) {
+    // Отключаем выделение текста
+    document.body.style.userSelect = 'none';
+
+    // Отключаем взаимодействие со скриптом
+    sphere.disableInteraction();
+
+    // Устанавливаем курсор в значение по умолчанию
+    document.body.style.cursor = 'default';
+  } else {
+    // Включаем выделение текста и взаимодействие со скриптом
+    document.body.style.userSelect = 'auto';
+    sphere.enableInteraction();
+
+    // Устанавливаем курсор в значение по умолчанию
+    document.body.style.cursor = 'auto';
+  }
+});
+
+
+
 // Функция анимации
 function animate() {
     requestAnimationFrame(animate);
@@ -300,3 +385,4 @@ function animate() {
 }
 
 animate();
+
