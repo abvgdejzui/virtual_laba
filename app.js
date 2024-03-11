@@ -74,3 +74,38 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('info-modal').style.display = 'none';
 	}
 }, false);
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+    document.getElementById('switch').addEventListener('click', function() {
+        var switchImage = document.getElementById('switch');
+        if (switchImage.src.endsWith('css/pics/off.jpg')) {
+           switchImage.src = 'css/pics/on.jpg'; // Переключаем на изображение включенного состояния
+           document.getElementById('window').style.color = 'lawngreen'; // Исправлено на 'color'
+          
+        } else {
+           switchImage.src = 'css/pics/off.jpg'; // Переключаем на изображение выключенного состояния
+           document.getElementById('window').style.color = 'black'; // Исправлено на 'color'
+           
+
+        }
+    });
+}, false);
+
+
+function infoInstruction(){
+    document.getElementById('info-instruction').style.display = 'block';  
+    document.getElementById('info-laba').style.display = 'none';
+    document.getElementById('info-contact').style.display = 'none';  
+}  
+function infoLaba(){
+    document.getElementById('info-instruction').style.display = 'none';  
+    document.getElementById('info-laba').style.display = 'block';
+    document.getElementById('info-contact').style.display = 'none';  
+}  
+function infoContact(){
+    document.getElementById('info-instruction').style.display = 'none';  
+    document.getElementById('info-laba').style.display = 'none';
+    document.getElementById('info-contact').style.display = 'block';  
+}  

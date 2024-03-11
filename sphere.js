@@ -115,9 +115,9 @@ function updatePointInFront() {
     
 
     var XCoord = document.getElementById('X-coord');
-    XCoord.textContent = (point.x).toFixed(3)
+    XCoord.textContent = (mesh.position.x).toFixed(3)
     var YCoord = document.getElementById('Y-coord');
-    YCoord.textContent = (point.z).toFixed(3)
+    YCoord.textContent = (mesh.position.z).toFixed(3)
    
 }
 

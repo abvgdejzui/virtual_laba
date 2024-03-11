@@ -17,16 +17,25 @@
   <div id="Information">
     <div id="info-back"></div>
     <div id="info-modal">
-      <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+      <ul class="menu-bar" id="menu">
+        <li id="instruct-head" onclick="infoInstruction()">Инструкция</li>
+        <li id="laba-head" onclick="infoLaba()">Лабораторная установка</li>
+        <li id="contact-head" onclick="infoContact()">Контакты</li>
+        <li onclick="closeInfo()" id="close-info">Закрыть</li>
+      </ul>
+
+      <div id="info-instruction">
+        <p>Чтобы переключить камеру, воспользуйтесь стрелками на клавиатуре. </p>
       </div>
-      <div id="info-text">
-        <button onclick="closeInfo()">X</button>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis corporis voluptatibus non exercitationem fugit! Vitae, sit aliquid alias laudantium veniam obcaecati excepturi eos corrupti, quam laborum necessitatibus aliquam optio voluptate iste hic a, est libero autem molestiae eaque culpa maxime.</p>
+
+      <div id="info-laba">
+        <p>В данной установке используется виток и катушка.</p>
       </div>
+
+      <div id="info-contact">
+        <p>Виртуальную лабораторную работу разработали студенты СПБГЭТУ "ЛЭТИ" группы 3374 Урусов А., Гренадерова А.,  Владимирская А. под руководством Чирцова Александра Сергеевича.</p>
+      </div>
+
     </div>
 </div>
 
@@ -99,15 +108,8 @@
             </p>
           </div>
           <br>
-          <div class="form_toggle">
-            <div class="form_toggle-item item-1">
-              <input id="fid-1" type="radio" name="radio" value="off" checked>
-              <label for="fid-1">ВЫКЛ</label>
-            </div>
-            <div class="form_toggle-item item-2">
-              <input id="fid-2" type="radio" name="radio" value="on">
-              <label for="fid-2">ВКЛ</label>
-            </div>
+          <div class="switch-container">
+            <img src="css/pics/off.jpg" alt="switch" id="switch">
           </div>
         </div>
         <button class="custom-btn btn-2">Записать</button>
