@@ -151,11 +151,11 @@ function updatePointInFront(db) {
             const Rvitka = snapshot.val();
             const direction = new THREE.Vector3();
             mesh.getWorldDirection(direction.set());
-            direction.multiplyScalar(100);
+            direction.multiplyScalar(2);
             var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
-            const n = 100;
+            const n = 1000;
             var s = [0, 0, 0];
-            const point = mesh.position.clone().add(direction);
+            const point = mesh.position.clone().add(direction).multiplyScalar(Rvitka / 30);
             for (let i = 0; i < 2 * n; i++){
                 const alpha = Math.PI * i / n;
                 const alpha_next = Math.PI * (i + 1) / n;
@@ -167,7 +167,7 @@ function updatePointInFront(db) {
                 const m_next_z = 0;
                 const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
                 const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-                var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]); ``
+                var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
                 prod[0] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
                 prod[1] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
                 prod[2] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
@@ -175,9 +175,9 @@ function updatePointInFront(db) {
                 s[1] += prod[1];  
                 s[2] += prod[2];   
             }
-            var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))];
-            var res2 = length(I[0], I[1],I[2]);
-            console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1 * res2 * 1000 * 2000, Ivitka);
+            // var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))]
+            var res2 = length(s[0], s[1], s[2]);
+            console.log(res1 * res2 * 1000);
         });
     });
 }
