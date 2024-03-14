@@ -37,7 +37,7 @@ function save_IR() {
 
 // качалка показаний
 function downloadFile() {
-    var data = document.querySelector('ol').innerText;
+    var data = document.querySelector('p').innerText;
     var blob = new Blob([data], {type: 'text/plain'});
     var url = window.URL.createObjectURL(blob);
     var link = document.createElement('a');
