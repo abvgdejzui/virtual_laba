@@ -48,7 +48,8 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #pokazanieText{
-    max-height: 350px; /* Устанавливает максимальную высоту блока */
+    max-height: 350px;
+    min-height: 350px; /* Устанавливает максимальную высоту блока */
     overflow: auto; /* Добавляет полосы прокрутки, если содержимое блока превышает его высоту */
     padding-right: 5px;
 }

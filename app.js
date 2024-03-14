@@ -20,6 +20,29 @@ function save_IR() {
    
 }
 
+/*function find_Ez() {
+    var Ivitka = document.getElementById('I_vitk').value; //получаем из формы
+    var Rvitka = document.getElementById('R_vitk').value;
+
+    res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
+    Ezonda = res1*10000 //домножила
+
+    ///////ВЫВОД//////
+    //var Ik = document.getElementById('Ik');
+    document.getElementById('Ik').textContent = Ivitka
+
+    //var Uk = document.getElementById('Uk');
+    document.getElementById('Uk').textContent = Rvitka
+
+    //var Ez = document.getElementById('Ez');
+    document.getElementById('Ez').textContent = Ezonda.toFixed(2)
+}
+
+document.getElementById('I_vitk').addEventListener('input', find_Ez);
+document.getElementById('R_vitk').addEventListener('input', find_Ez);
+*/
+
+
 // качалка показаний
 function downloadFile() {
     var data = document.querySelector('ol').innerText;
@@ -109,3 +132,21 @@ function infoContact(){
     document.getElementById('info-laba').style.display = 'none';
     document.getElementById('info-contact').style.display = 'block';  
 }  
+
+// Записать показания //
+
+function record() {
+
+    if (document.getElementById('window').style.color == 'lawngreen') {
+        var A = document.getElementById('Ik').textContent;
+    var B = document.getElementById('Uk').textContent;
+    var C = document.getElementById('Ez').textContent;
+    var fixedValues = document.getElementById('pokazanieText');
+    var newRecord = document.createElement('p');
+    newRecord.textContent = `Ik=${A} Uk=${B} Ez=${C}`;
+    fixedValues.appendChild(newRecord);
+    }
+    else {
+        alert ('Включите экран с показаниями! Откуда мне записывать?')
+    }
+}
