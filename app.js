@@ -37,7 +37,16 @@ function save_IR() {
 
 // качалка показаний
 function downloadFile() {
-    var data = document.querySelector('p').innerText;
+    // Получаем элемент с ID 'pokazanieText'
+    var olElement = document.getElementById('pokazanieText');
+    // Получаем все элементы <li> внутри <ol>
+    var liElements = olElement.getElementsByTagName('li');
+    var data = '';
+    for (var i = 0; i < liElements.length; i++) {
+        // Добавляем нумерацию к каждому элементу списка
+        data += (i + 1) + '. ' + liElements[i].innerText + "\n";
+    }
+
     var blob = new Blob([data], {type: 'text/plain'});
     var url = window.URL.createObjectURL(blob);
     var link = document.createElement('a');
@@ -119,7 +128,7 @@ function record() {
     var B = document.getElementById('Uk').textContent;
     var C = document.getElementById('Ez').textContent;
     var fixedValues = document.getElementById('pokazanieText');
-    var newRecord = document.createElement('p');
+    var newRecord = document.createElement('li');
     newRecord.textContent = `Ik=${A} Uk=${B} Ez=${C}`;
     fixedValues.appendChild(newRecord);
     }
