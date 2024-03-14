@@ -18,6 +18,8 @@ function signIn() {
 function save_IR() {
     var Ivitka = document.getElementById('I_vitk').value; //получаем из формы
     var Rvitka = document.getElementById('R_vitk').value;
+    db.ref('Ivitka').set(parseInt(Ivitka));
+    db.ref('Rvitka').set(parseInt(Rvitka));
 
     res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
     Ezonda = res1*10000 //домножила

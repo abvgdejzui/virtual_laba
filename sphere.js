@@ -144,35 +144,44 @@ function minus(a, b) {
     return [rx, ry, rz];
 } 
 
-function updatePointInFront() {
-    const direction = new THREE.Vector3();
-    mesh.getWorldDirection(direction.set());
-    direction.multiplyScalar(1.5);
-    const n = 100;
-    let s = 0;
-    const point = mesh.position.clone().add(direction);
-    for (let i = 0; i < 2 * n; i++){
-        const alpha = Math.PI * i / n;
-        const alpha_next = Math.PI * (i + 1) / n;
-        const m_x = Rvitka * Math.cos(alpha);
-        const m_y = Rvitka * Math.sin(alpha);
-        const m_z = 0;
-        const m_next_x = Rvitka * Math.cos(alpha_next);
-        const m_next_y = Rvitka * Math.sin(alpha_next);
-        const m_next_z = 0;
-        const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
-        const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-        // const prod = cross(dl, dr) * Math.pow(length(dr[0], dr[1], dr[2]), -3);
-        // s += prod;
-    }
-    var res2 = s * (1 / (2 * n));
-    console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1, res2);
-    
-    var XCoord = document.getElementById('X-coord');
-    XCoord.textContent = (point.x).toFixed(3)
-    var YCoord = document.getElementById('Y-coord');
-    YCoord.textContent = (point.z).toFixed(3)
+function updatePointInFront(db) {
+    db.ref('Ivitka').once('value').then(snapshot => {
+        const Ivitka = snapshot.val();
+        db.ref('Rvitka').once('value').then(snapshot => {
+            const Rvitka = snapshot.val();
+            const direction = new THREE.Vector3();
+            mesh.getWorldDirection(direction.set());
+            direction.multiplyScalar(100);
+            var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
+            const n = 100;
+            var s = [0, 0, 0];
+            const point = mesh.position.clone().add(direction);
+            for (let i = 0; i < 2 * n; i++){
+                const alpha = Math.PI * i / n;
+                const alpha_next = Math.PI * (i + 1) / n;
+                const m_x = Rvitka * Math.cos(alpha);
+                const m_y = Rvitka * Math.sin(alpha);
+                const m_z = 0;
+                const m_next_x = Rvitka * Math.cos(alpha_next);
+                const m_next_y = Rvitka * Math.sin(alpha_next);
+                const m_next_z = 0;
+                const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
+                const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
+                var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]); ``
+                prod[0] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+                prod[1] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+                prod[2] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+                s[0] += prod[0];
+                s[1] += prod[1];  
+                s[2] += prod[2];   
+            }
+            var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))];
+            var res2 = length(I[0], I[1],I[2]);
+            console.log("Обновленные координаты точки впереди mesh:", point, direction, mesh.position, res1 * res2 * 1000 * 2000, Ivitka);
+        });
+    });
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -278,7 +287,7 @@ document.addEventListener('mousemove', event => {
     else if (mousewheel) {
         mesh.rotation.y -= (deltaMove.x * 0.07) * -1;
     }
-    updatePointInFront();
+    updatePointInFront(db);
     prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
 
