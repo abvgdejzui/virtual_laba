@@ -150,6 +150,9 @@ function updatePointInFront(db) {
         db.ref('Rvitka').once('value').then(snapshot => {
             const Rvitka = snapshot.val();
             const direction = new THREE.Vector3();
+            
+            
+
             mesh.getWorldDirection(direction.set());
             direction.multiplyScalar(2);
             var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
@@ -177,7 +180,13 @@ function updatePointInFront(db) {
             }
             // var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))]
             var res2 = length(s[0], s[1], s[2]);
+            var res = res1 * res2 * 1000
             console.log(res1 * res2 * 1000);
+
+            document.getElementById('Ez').textContent = res.toFixed(2)
+
+            
+            
         });
     });
 }
@@ -326,6 +335,8 @@ document.addEventListener('mousemove', (event) => {
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    document.getElementById('X-coord').textContent = mesh.position.x.toFixed(3)   
+    document.getElementById('Y-coord').textContent = mesh.position.z.toFixed(3)
 }
 
 animate();
