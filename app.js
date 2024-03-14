@@ -30,8 +30,8 @@ function save_IR() {
     var Uk = document.getElementById('Uk');
     Uk.textContent = Rvitka
 
-    var Ez = document.getElementById('Ez');
-    Ez.textContent = Ezonda.toFixed(2) //округл до двух символов
+    //var Ez = document.getElementById('Ez');
+    //Ez.textContent = Ezonda.toFixed(2) //округл до двух символов
    
 }
 
