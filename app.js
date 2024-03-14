@@ -1,6 +1,19 @@
-window.Ivitka = 10; 
-window.Rvitka = 10;
-window.res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
+var auth = firebase.auth();
+var db = firebase.database();
+function signIn() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            var user = userCredential.user;
+            console.log("Signed in as:", user.email);
+            window.location.href = 'main.html';
+        })
+        .catch((error) => {
+            alert('Неверный пароль. Попробуйте еще раз.');
+        });
+}
 
 function save_IR() {
     var Ivitka = document.getElementById('I_vitk').value; //получаем из формы
@@ -16,32 +29,9 @@ function save_IR() {
     Uk.textContent = Rvitka
 
     var Ez = document.getElementById('Ez');
-    Ez.textContent = Ezonda.toFixed(2) //округл до двух симв
+    Ez.textContent = Ezonda.toFixed(2) //округл до двух символов
    
 }
-
-/*function find_Ez() {
-    var Ivitka = document.getElementById('I_vitk').value; //получаем из формы
-    var Rvitka = document.getElementById('R_vitk').value;
-
-    res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
-    Ezonda = res1*10000 //домножила
-
-    ///////ВЫВОД//////
-    //var Ik = document.getElementById('Ik');
-    document.getElementById('Ik').textContent = Ivitka
-
-    //var Uk = document.getElementById('Uk');
-    document.getElementById('Uk').textContent = Rvitka
-
-    //var Ez = document.getElementById('Ez');
-    document.getElementById('Ez').textContent = Ezonda.toFixed(2)
-}
-
-document.getElementById('I_vitk').addEventListener('input', find_Ez);
-document.getElementById('R_vitk').addEventListener('input', find_Ez);
-*/
-
 
 // качалка показаний
 function downloadFile() {
@@ -57,16 +47,6 @@ function downloadFile() {
     document.body.removeChild(link);
 }
 
-/*exit
-function gotovoExit() {
-    window.location.href = "exit.html"; //переход
-}
-var btn = document.getElementById("gotovo");
-var span = document.getElementsByClassName("close")[0];
-
-span.onclick = function() {
- window.location.href = "index.html"; //переход
-} */
 
 function exit() {
     window.location.href = "index.html"; 
@@ -99,19 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
     document.getElementById('switch').addEventListener('click', function() {
         var switchImage = document.getElementById('switch');
         if (switchImage.src.endsWith('css/pics/off.jpg')) {
-           switchImage.src = 'css/pics/on.jpg'; // Переключаем на изображение включенного состояния
-           document.getElementById('window').style.color = 'lawngreen'; // Исправлено на 'color'
+           switchImage.src = 'css/pics/on.jpg';
+           document.getElementById('window').style.color = 'lawngreen';
           
         } else {
-           switchImage.src = 'css/pics/off.jpg'; // Переключаем на изображение выключенного состояния
-           document.getElementById('window').style.color = 'black'; // Исправлено на 'color'
-           
-
+           switchImage.src = 'css/pics/off.jpg';
+           document.getElementById('window').style.color = 'black'; 
         }
     });
 }, false);
@@ -134,7 +110,6 @@ function infoContact(){
 }  
 
 // Записать показания //
-
 function record() {
 
     if (document.getElementById('window').style.color == 'lawngreen') {
