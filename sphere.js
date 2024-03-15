@@ -150,14 +150,13 @@ function updatePointInFront(db) {
         db.ref('Rvitka').once('value').then(snapshot => {
             const Rvitka = snapshot.val();
             const direction = new THREE.Vector3();
-            
-            
 
             mesh.getWorldDirection(direction.set());
-            direction.multiplyScalar(2);
+            direction.multiplyScalar(1.5);
             var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
             const n = 1000;
             var s = [0, 0, 0];
+            const pointVyvod = mesh.position.clone().add(direction)
             const point = mesh.position.clone().add(direction).multiplyScalar(Rvitka / 30);
             for (let i = 0; i < 2 * n; i++){
                 const alpha = Math.PI * i / n;
@@ -185,7 +184,8 @@ function updatePointInFront(db) {
 
             document.getElementById('Ez').textContent = res.toFixed(2)
 
-            
+            document.getElementById('X-coord').textContent = pointVyvod.x.toFixed(3)   
+            document.getElementById('Y-coord').textContent = pointVyvod.z.toFixed(3)
             
         });
     });
@@ -278,6 +278,7 @@ document.addEventListener('mouseup', event => {
 });
 
 document.addEventListener('mousemove', event => {
+    document.body.style.userSelect = 'none';
     const deltaMove = {
         x: event.offsetX - prevMousePos.x,
         y: event.offsetY - prevMousePos.y
@@ -301,13 +302,10 @@ document.addEventListener('mousemove', event => {
 });
 
 
-
-
+/*
 const sphereElement = document.querySelector('.centered-script');
-
 // Устанавливаем для элемента sphereElement стиль pointer-events: none;
 sphereElement.style.pointerEvents = 'none';
-
 // Добавляем прослушиватель событий mousemove к документу
 document.addEventListener('mousemove', (event) => {
   // Проверяем, находится ли курсор мыши за пределами элемента sphereElement
@@ -315,28 +313,24 @@ document.addEventListener('mousemove', (event) => {
   if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) {
     // Отключаем выделение текста
     document.body.style.userSelect = 'none';
-
     // Отключаем взаимодействие со скриптом
     sphere.disableInteraction();
-
     // Устанавливаем курсор в значение по умолчанию
     document.body.style.cursor = 'default';
   } else {
     // Включаем выделение текста и взаимодействие со скриптом
     document.body.style.userSelect = 'auto';
     sphere.enableInteraction();
-
     // Устанавливаем курсор в значение по умолчанию
     document.body.style.cursor = 'auto';
   }
 });
+*/
 
 // Функция анимации
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    document.getElementById('X-coord').textContent = mesh.position.x.toFixed(3)   
-    document.getElementById('Y-coord').textContent = mesh.position.z.toFixed(3)
 }
 
 animate();
