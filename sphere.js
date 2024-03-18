@@ -182,13 +182,20 @@ function updatePointInFront(db) {
             var res = res1 * res2 * 1000
             console.log(res1 * res2 * 1000);
 
-            document.getElementById('Ez').textContent = res.toFixed(2)
-
-            document.getElementById('X-coord').textContent = pointVyvod.x.toFixed(3)   
-            document.getElementById('Y-coord').textContent = pointVyvod.z.toFixed(3)
+            //document.getElementById('Ez').textContent = res.toFixed(2)
+            //document.getElementById('X-coord').textContent = pointVyvod.x.toFixed(3)   
+            //document.getElementById('Y-coord').textContent = pointVyvod.z.toFixed(3)
             
-        });
-    });
+
+            // Отправляем сообщение в родительское окно
+            window.parent.postMessage({
+                type: 'updateCoordinates',
+                res: res.toFixed(2),
+                x: pointVyvod.x.toFixed(3),
+                z: pointVyvod.z.toFixed(3)            
+            }, '*');
+                    });
+                });
 }
 
 
@@ -286,12 +293,12 @@ document.addEventListener('mousemove', event => {
 
     if (mouseDown && !isCameraTransformed) {
         mesh.position.z += (deltaMove.x * 0.06) * -1;
-        mesh.position.x += (deltaMove.y * 0.08) * 1;
+        mesh.position.x += (deltaMove.y * 0.07) * 1;
     }
 
     else if (mouseDown && isCameraTransformed){
-        mesh.position.x += deltaMove.x * 0.06;
-        mesh.position.z += (deltaMove.y * 0.08);
+        mesh.position.x += deltaMove.x * 0.04;
+        mesh.position.z += (deltaMove.y * 0.04);
     }
 
     else if (mousewheel) {

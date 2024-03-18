@@ -136,3 +136,14 @@ function record() {
         alert ('Включите экран с показаниями! Откуда мне записывать?')
     }
 }
+
+
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'updateCoordinates') {
+        // Обновляем элементы DOM
+        document.getElementById('Ez').textContent = event.data.res;
+        document.getElementById('X-coord').textContent = event.data.x;
+        document.getElementById('Y-coord').textContent = event.data.z;
+    }
+});
+
