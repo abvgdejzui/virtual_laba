@@ -77,6 +77,7 @@ loader.load('./models/osi.stl', function (geometry){
     meshOsi = new THREE.Mesh(geometry, materialOsi);
     scene.add(meshOsi);
     meshOsi.rotation.x = -Math.PI / 2;
+    meshOsi.position.y = 0.01;
 })
 
 // *** задаю датчик ***
