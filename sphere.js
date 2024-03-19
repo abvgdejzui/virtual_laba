@@ -214,8 +214,8 @@ function updatePointInFront(db) {
             window.parent.postMessage({
                 type: 'updateCoordinates',
                 res: res.toFixed(2),
-                x: pointVyvod.x.toFixed(3),
-                z: pointVyvod.z.toFixed(3)            
+                x: mesh.position.x.toFixed(3),
+                z: mesh.position.z.toFixed(3)            
             }, '*');
                     });
                 });
