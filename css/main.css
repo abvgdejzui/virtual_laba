@@ -45,6 +45,13 @@ object{
     margin-left: auto;
  }
 
+#window {
+  user-select: none;
+  -webkit-user-select: none; /* Для Safari и Chrome */
+  -moz-user-select: none; /* Для Firefox */
+  -ms-user-select: none; /* Для Internet Explorer/Edge */
+}
+
  #pokazanie{
     background-image: url('pics/note.png');
     background-repeat: no-repeat;
@@ -56,10 +63,9 @@ object{
     padding-top: 100px;
     padding: 8px;
     padding-right: 1px;
-    margin-top: 10px;
-
-    
+    margin-top: 10px;    
 }
+
 #pokazanieHead{
     margin-top:45px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
