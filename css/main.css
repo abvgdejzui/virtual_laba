@@ -10,21 +10,33 @@ h3{
 
 }
 
-object{
-  margin-top: auto;
-  margin-left: auto;
+object {
+  width: 100%;
+  height: 72vh;
+  margin-top: 5px;
+  margin-left: 1px;
   border: 5px solid gray;
+  
+ }
+ #data {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center; /* Горизонтальное выравнивание */
-
-  /*height: 600px;  Убедитесь, что контейнер имеет высоту */
-}
-
+  align-items: center; /* Вертикальное выравнивание */
+  
+ 
+ flex-direction: column; /* Управление вертикальным расположением элементов */
+ /* Центрирование элементов по вертикали */
+ /* Центрирование элементов по горизонтали */
+ height: 72vh; /* Занимает всю высоту видимой области */
+ }
  .coords {
     margin: 10px;
     text-align: right;
  }
 
+ /* шапка */
  header{
   margin-bottom: 5px;
   margin-top: 10px;
@@ -39,19 +51,38 @@ object{
 
   
 }
-
  #info {
-    
     margin-left: auto;
  }
+
+
+ /* Окошко в правом столбце */
+.Pokazatel {
+  font-size: larger;
+  border: 7px ridge dimgray;
+  margin-top: 13%;
+  padding: 10px;
+  background: gray;
+}
 
 #window {
   user-select: none;
   -webkit-user-select: none; /* Для Safari и Chrome */
   -moz-user-select: none; /* Для Firefox */
   -ms-user-select: none; /* Для Internet Explorer/Edge */
+  
+  border: 5px solid darkslategray;
+  background: black;
+  color: black;
+  text-align: center;
+  font-family: monospace;
+  font-size: 2.6vh;
 }
 
+
+
+
+/* блокнот для записи */
  #pokazanie{
     background-image: url('pics/note.png');
     background-repeat: no-repeat;
@@ -63,7 +94,10 @@ object{
     padding-top: 100px;
     padding: 8px;
     padding-right: 1px;
-    margin-top: 10px;    
+    margin-top: 10px;   
+    
+    /*max-height: 70;
+    min-height: 350px; /* Устанавливает максимальную высоту блока */
 }
 
 #pokazanieHead{
@@ -72,12 +106,13 @@ object{
     font-size: larger;
 }
 #pokazanieText{
-    max-height: 350px;
-    min-height: 350px; /* Устанавливает максимальную высоту блока */
+    max-height: 50vh;
+    min-height: 50vh; /* Устанавливает максимальную высоту блока */
     overflow: auto; /* Добавляет полосы прокрутки, если содержимое блока превышает его высоту */
     padding-right: 5px;
 }
 
+/* МОДАЛЬНОЕ ОКНО ИНСТРУКЦИЯ К УСТАНОВКЕ */
 #info-modal{
     display: none;
     font-family: "Exo 2", sans-serif;
@@ -180,18 +215,18 @@ object{
     margin-left: 30px;
 }
 
-
+/*Кнопочка on-off*/
 .switch-container {
  width: 74px; /* Ширина контейнера переключателя */
  height: 58px; /* Высота контейнера переключателя */
  border: 0px solid #ccc; /* Граница для визуализации */
  cursor: pointer; /* Изменение курсора на указатель при наведении */
 }
-
 #switch-image {
  width: 100%; /* Изображение занимает всю ширину контейнера */
  height: 100%; /* Изображение занимает всю высоту контейнера */
 }
+
 
 /* нижняя табличка для I R */
 table {

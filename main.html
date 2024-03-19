@@ -46,14 +46,17 @@
 
   <div class="container">
       <div class="column">
-        <button class="custom-btn btn-1" onclick="exit()">Выход</button>
+        <div class="knopka">
+          <button class="custom-btn btn-1" onclick="exit()">Выход</button>
+        </div>
           <div id="pokazanie">
               <p id="pokazanieHead">Показания</p>
               <ol id="pokazanieText">
                 
               </ol>
-              
-               <button onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
+              <div class="knopka">
+               <button class="custom-btn btn-5" onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
+              </div>
           </div>
       </div>        
 
@@ -65,8 +68,8 @@
           </span>
         </header>
 
-        <div>
-          <object data="script.html" width="900px" height="500px" ></object>
+        <div id="data">
+          <object data="script.html"  ></object>
         </div>
         
         <div>
@@ -75,7 +78,7 @@
               <td>
                 I в витке =
                 <input type="number" id="I_vitk" placeholder="Введите I" value="50">
-                А
+                мА
               </td>
               <td>
                 R витка =
@@ -83,7 +86,7 @@
                 см
               </td>
               <td>
-                <button onclick="save_IR()">Сохранить</button>
+                <button class="custom-btn btn-6" onclick="save_IR()">Сохранить</button>
               </td>
             </tr>
           </table>
@@ -120,7 +123,10 @@
             <img src="css/pics/off.jpg" alt="switch" id="switch">
           </div>
         </div>
-        <button class="custom-btn btn-2" onclick="record()">Записать</button>
+        <div class="knopka">
+          <button class="custom-btn btn-2" onclick="record()">Записать</button>
+        </div>
+        
       </div>
   </div>
 </body>

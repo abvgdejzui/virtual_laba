@@ -31,29 +31,14 @@ header{
     padding-left: 4px;
 }
 .column:nth-child(2){
-    flex: 0 0 61%;
+    flex: 0 0 59%;
 }
 
 
 
 
 
-/* Окошко в правом столбце */
-.Pokazatel {
-    font-size: larger;
-    border: 7px ridge dimgray;
-    margin-top: 13%;
-    padding: 10px;
-    background: gray;
-}
-#window{
-    border: 5px solid darkslategray;
-    background: black;
-    color: black;
-    text-align: center;
-    font-family: monospace;
-    
-}
+
 
 
 
@@ -98,6 +83,15 @@ header{
 
 
 /* КНОПКИ */
+
+.knopka{
+  display: flex;
+ justify-content: center; /* Горизонтальное выравнивание */
+  /* Вертикальное выравнивание */
+  /* Убедитесь, что контейнер имеет высоту */
+}
+
+
 .custom-btn {
     width: 130px;
     height: 40px;
@@ -135,17 +129,14 @@ header{
     background: green;
     background: linear-gradient(0deg, green 0%, LimeGreen 100%);
     border: none;
-    margin-top: 20%;
-    margin-left: 10px;
-    font-size: x-large;
-    width: 230px;
-    height: 60px;
-   
+    margin-top: 4vh;
+    width: 35vh;
+    height: 8vh;
+    font-size: larger;
   }
   .btn-2:hover {
      background: LimeGreen;
     background: linear-gradient(0deg, Green 0%, lawngreen 100%);
-    margin-top: 20%;
   }
 
   .btn-3 {
@@ -189,6 +180,35 @@ header{
     background: linear-gradient(0deg, gray 0%, lightseagreen 100%);
  
   }
+  .btn-5 {
+    background: lightgray;
+    color: darkblue;
+    background: linear-gradient(0deg, gray 0%, lightgray 100%);
+    padding-bottom: 5px;
+    width:26vh;
+    height: 7vh;
+    margin-right: 13px;
+    margin-left: 0px;
+  }
+  .btn-5:hover {
+    background: lightseagreen;
+    background: linear-gradient(0deg, gray 0%, lightseagreen 100%);
+  }
+  .btn-6 {
+    background: lightgray;
+    color: darkblue;
+    background: linear-gradient(0deg, gray 0%, lightgray 100%);
+    padding-top: 4px;
+    width:26vh;
+    height: 5vh;
+    padding-bottom: 20px;
+    margin: 0px;
+  }
+  .btn-6:hover {
+    background: lightseagreen;
+    background: linear-gradient(0deg, gray 0%, lightseagreen 100%);
+  }
+
 
 /* exit */
    .modal-content {
