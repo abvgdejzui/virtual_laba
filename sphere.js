@@ -248,24 +248,38 @@ document.addEventListener('mousedown', event => {
     }
 });
 
+// Инициализация переменной cameraMode
+let cameraMode = 0;
+
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft'){ 
-        if (isCameraTransformed) {
-            camera.position.set(50, 14, 12);
-            camera.rotation.set(-0.6,0.8,0.5);
-            materialKrug.opacity = 0.9;
-        } else {
-            camera.position.set(30, 25, 0);
-            camera.rotation.set(-Math.PI / 2, 0, 0);
-            materialKrug.opacity = 0.5;
+        cameraMode = (event.key === 'ArrowRight') ? (cameraMode + 1) : (cameraMode - 1);
+        cameraMode = (cameraMode + 3) % 3; // 3 - количество режимов
+
+        // Устанавливаем параметры камеры в зависимости от текущего режима
+        switch (cameraMode) {
+            case 0:
+                camera.position.set(50, 14, 12);
+                camera.rotation.set(-0.6,0.8,0.5);
+                materialKrug.opacity = 0.9;
+                break;
+            case 1:
+                camera.position.set(0, 25, 0);
+                camera.rotation.set(-Math.PI / 2, 0, 0);
+                materialKrug.opacity = 0.5;
+                break;
+            case 2:
+                camera.position.set(30, 25, 0);
+                camera.rotation.set(-Math.PI / 2, 0, 0);
+                materialKrug.opacity = 0.5;
+                break;
         }
-        isCameraTransformed = !isCameraTransformed;
+
         materialKrug.needsUpdate = true; // Обновляем материал
     }
     
     else if (event.key === 'Enter') {
         const direction = new THREE.Vector3();
-        const distance = 0.5;
         mesh.getWorldDirection(direction.set());
         direction.multiplyScalar(1.5);
         const point = mesh.position.clone().add(direction);
@@ -292,48 +306,30 @@ document.addEventListener('mousemove', event => {
         y: event.offsetY - prevMousePos.y
     };
 
-    if (mouseDown && !isCameraTransformed) {
-        mesh.position.z += (deltaMove.x * 0.06) * -1;
-        mesh.position.x += (deltaMove.y * 0.07) * 1;
+    if (mouseDown) {
+        switch (cameraMode) {
+            case 0:
+                mesh.position.z += (deltaMove.x * 0.06) * -1;
+                mesh.position.x += (deltaMove.y * 0.07) * 1;
+                break;
+            case 1:
+                mesh.position.x += deltaMove.x * 0.04;
+                mesh.position.z += (deltaMove.y * 0.04);
+                break;
+            case 2:
+                 mesh.position.x += deltaMove.x * 0.04;
+                 mesh.position.z += (deltaMove.y * 0.04);
+                 break;
+        }
     }
 
-    else if (mouseDown && isCameraTransformed){
-        mesh.position.x += deltaMove.x * 0.04;
-        mesh.position.z += (deltaMove.y * 0.04);
-    }
-
-    else if (mousewheel) {
+    if (mousewheel) {
         mesh.rotation.y -= (deltaMove.x * 0.07) * -1;
     }
+
     updatePointInFront(db);
     prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
-
-
-/*
-const sphereElement = document.querySelector('.centered-script');
-// Устанавливаем для элемента sphereElement стиль pointer-events: none;
-sphereElement.style.pointerEvents = 'none';
-// Добавляем прослушиватель событий mousemove к документу
-document.addEventListener('mousemove', (event) => {
-  // Проверяем, находится ли курсор мыши за пределами элемента sphereElement
-  const rect = sphereElement.getBoundingClientRect();
-  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) {
-    // Отключаем выделение текста
-    document.body.style.userSelect = 'none';
-    // Отключаем взаимодействие со скриптом
-    sphere.disableInteraction();
-    // Устанавливаем курсор в значение по умолчанию
-    document.body.style.cursor = 'default';
-  } else {
-    // Включаем выделение текста и взаимодействие со скриптом
-    document.body.style.userSelect = 'auto';
-    sphere.enableInteraction();
-    // Устанавливаем курсор в значение по умолчанию
-    document.body.style.cursor = 'auto';
-  }
-});
-*/
 
 // Функция анимации
 function animate() {
