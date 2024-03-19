@@ -59,10 +59,14 @@ object {
  /* Окошко в правом столбце */
 .Pokazatel {
   font-size: larger;
+  background: gray;
+  background-image: url('pics/metall.jpg');
+  background-repeat: no-repeat;
   border: 7px ridge dimgray;
   margin-top: 13%;
   padding: 10px;
-  background: gray;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; /* Создает обводку */
+  
 }
 
 #window {
