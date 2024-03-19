@@ -1,8 +1,23 @@
 body {
-  font-family: "Exo 2", sans-serif;
+  font-family: "Prosto One", sans-serif;
+  font-weight: 400;
   background-image: url('pics/back.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+h3{
+  font-family: "Exo 2", sans-serif;
+
+}
+
+object{
+  margin-top: auto;
+  margin-left: auto;
+  border: 5px solid gray;
+  display: flex;
+  justify-content: center; /* Горизонтальное выравнивание */
+
+  /*height: 600px;  Убедитесь, что контейнер имеет высоту */
 }
 
  .coords {
@@ -10,11 +25,24 @@ body {
     text-align: right;
  }
 
+ header{
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: flex;
+    justify-content: right;
+}
 #header{
-    font-size: x-large;
- }
+  font-family: "Prosto One", sans-serif;
+  font-weight: 500;
+  font-size: xx-large;
+  font-style: normal;
+
+  
+}
+
  #info {
-    margin-left: 50%;
+    
+    margin-left: auto;
  }
 
  #pokazanie{
@@ -33,8 +61,9 @@ body {
     
 }
 #pokazanieHead{
-    margin-top:40px;
+    margin-top:45px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
 }
 #pokazanieText{
     max-height: 350px;
@@ -45,6 +74,7 @@ body {
 
 #info-modal{
     display: none;
+    font-family: "Exo 2", sans-serif;
     position: absolute;
     background-color: LightSlateGray;
     border: 5px solid DimGray;
@@ -157,3 +187,28 @@ body {
  height: 100%; /* Изображение занимает всю высоту контейнера */
 }
 
+/* нижняя табличка для I R */
+table {
+  margin-top: 8px;
+  height: 5% ;
+  display: flex;
+  justify-content: center; /* Горизонтальное выравнивание */
+  margin-right: 10px;
+  margin-left: 10px;
+}
+td {
+  border: 3px solid darkslategray;
+  width: 800px ;
+  background-color: darkgrey;
+  color: midnightblue;
+  padding: 10px;
+}
+td:nth-child(3) {
+  width: 20%
+}
+input[type="number"] {
+  width:  80px;
+   /* Устанавливаем высоту поля ввода */
+  font-size:  14px; /* Устанавливаем размер шрифта */
+  text-align: center;
+}

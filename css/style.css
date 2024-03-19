@@ -6,6 +6,17 @@ body{
 }
 
 
+header{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+#header{
+    font-family: "Prosto One", sans-serif;
+    font-weight: 500;
+    font-size: xx-large;
+    font-style: normal;
+}
+
 /* колонки/контейнеры */
 .container {
     display: flex;
@@ -28,31 +39,6 @@ body{
 
 
 
-/* нижняя табличка для I R */
-table {
-    width: 60% ;
-    height: 5% ;
-    position: absolute;
-    top: 90.5%;
-    left: 46%;
-    transform: translate(-50%, -50%)
-}
-td {
-    border: 3px solid darkslategray;
-    background-color: darkgrey;
-    color: midnightblue;
-    padding: 10px;
-}
-td:nth-child(3) {
-    width: 20%
-}
-
-input[type="number"] {
-    width:  80px;
-     /* Устанавливаем высоту поля ввода */
-    font-size:  14px; /* Устанавливаем размер шрифта */
-    text-align: center;
-}
 
 /* Окошко в правом столбце */
 .Pokazatel {
@@ -120,7 +106,8 @@ input[type="number"] {
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Prosto One", sans-serif;
+    
     font-weight: 500;
     background: transparent;
     cursor: pointer;
@@ -148,17 +135,19 @@ input[type="number"] {
 
   .btn-2 {
     background: green;
-    background: linear-gradient(0deg, green 0%, green 100%);
+    background: linear-gradient(0deg, green 0%, LimeGreen 100%);
     border: none;
     margin-top: 20%;
-    margin-left: 25%;
+    margin-left: 10px;
+    font-size: x-large;
+    width: 250px;
+    height: 80px;
    
   }
   .btn-2:hover {
-     background: lawngreen;
-    background: linear-gradient(0deg, green 0%, lawngreen 100%);
+     background: LimeGreen;
+    background: linear-gradient(0deg, Green 0%, lawngreen 100%);
     margin-top: 20%;
-    margin-left: 25%;
   }
 
   .btn-3 {
@@ -183,6 +172,23 @@ input[type="number"] {
     margin:100px;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+
+
+  .btn-4 {
+    background: lightgray;
+    color: darkblue;
+    background: linear-gradient(0deg, lightgray 0%, gray 100%);
+    border: none;
+    width: 200px;
+    height: 50px;
+    margin-left:0px;
+    
+  }
+  .btn-4:hover {
+     background: red;
+    background: linear-gradient(0deg, darkred 0%, red 100%);
+ 
   }
 
 /* exit */
