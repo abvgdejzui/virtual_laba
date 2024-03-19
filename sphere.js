@@ -59,9 +59,9 @@ loader.load('./models/stol.stl', function (geometry){
 
 })
 
-// *** задаю оси ***
-const materialOsi = new THREE.MeshPhysicalMaterial({
-    color: 0xFFFFFF,
+// *** задаю оси y ***
+const materialOsiY = new THREE.MeshPhysicalMaterial({
+    color: 0xFF0000,
     metalness: 1,
     roughness: 1,
     opacity: 1,
@@ -69,16 +69,38 @@ const materialOsi = new THREE.MeshPhysicalMaterial({
     transmission: 0.99,
     clearcoat: 1.0,
     clearcoatRoughness: 0.25,
-    emissive: 0xFFFFFF,
+    emissive: 0x0000CD,            //тут оси у красятся
 })
-let meshOsi;
+let meshOsiY;
 loader.load('./models/osi.stl', function (geometry){
     geometry.scale(0.3,0.3,0.3)
-    meshOsi = new THREE.Mesh(geometry, materialOsi);
-    scene.add(meshOsi);
-    meshOsi.rotation.x = -Math.PI / 2;
-    meshOsi.position.y = 0.01;
+    meshOsiY = new THREE.Mesh(geometry, materialOsiY);
+    scene.add(meshOsiY);
+    meshOsiY.rotation.x = -Math.PI / 2;
+    meshOsiY.position.y = 0.01;
 })
+
+// *** задаю ось х ***
+const materialOsiX = new THREE.MeshPhysicalMaterial({
+    color: 0xFF0000,
+    metalness: 1,
+    roughness: 1,
+    opacity: 1,
+    transparent: false,
+    transmission: 0.99,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.25,
+    emissive: 0xFF0000,              //тут ось х красятся
+})
+let meshOsiX;
+loader.load('./models/osi_sr.stl', function (geometry){
+    geometry.scale(0.3,0.3,0.3)
+    meshOsiX = new THREE.Mesh(geometry, materialOsiX);
+    scene.add(meshOsiX);
+    meshOsiX.rotation.x = -Math.PI / 2;
+    meshOsiX.position.y = 0.012;
+})
+
 
 // *** задаю датчик ***
 const material = new THREE.MeshPhysicalMaterial({
