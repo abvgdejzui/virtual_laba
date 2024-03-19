@@ -105,7 +105,7 @@ object {
 }
 
 #pokazanieHead{
-    margin-top:45px;
+    margin-top:7vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: larger;
 }
