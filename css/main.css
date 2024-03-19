@@ -252,8 +252,17 @@ td:nth-child(3) {
   width: 20%
 }
 input[type="number"] {
-  width:  80px;
+  width:  50px;
    /* Устанавливаем высоту поля ввода */
-  font-size:  14px; /* Устанавливаем размер шрифта */
+  font-size:  16px; /* Устанавливаем размер шрифта */
   text-align: center;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 2px;
 }
+.table-element {
+  display: flex;
+  justify-content: center; /* Горизонтальное выравнивание */
+  align-items: center; /* Вертикальное выравнивание */
+  height: 100%; /* Убедитесь, что контейнер занимает всю высоту ячейки */
+ }
