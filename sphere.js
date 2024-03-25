@@ -123,49 +123,97 @@ loader.load('./models/model.stl', function (geometry){
 });
 
 function createCubeAtPoint(point) {
-    // Создаем геометрию куба
     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-    // Создаем материал для куба
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    // Создаем сам куб
     const cube = new THREE.Mesh(geometry, material);
-    // Устанавливаем позицию куба на координатах точки
     cube.position.copy(point);
-    // Добавляем куб на сцену
     scene.add(cube);
 }
 
 ///////////////////////////////////////////////////////////////////////
 
-function cross(a, b) {
-    const ax = a[0],
-      ay = a[1],
-      az = a[2],
-      bx = b[0],
-      by = b[1],
-      bz = b[2];
+// function cross(a, b) {
+//     const ax = a[0],
+//       ay = a[1],
+//       az = a[2],
+//       bx = b[0],
+//       by = b[1],
+//       bz = b[2];
   
-    const rx = ay * bz - az * by;
-    const ry = az * bx - ax * bz;
-    const rz = ax * by - ay * bx;
-    return [rx, ry, rz];
-} 
-function length(x, y, z) {
-    return Math.sqrt(x * x + y * y + z * z);
+//     const rx = ay * bz - az * by;
+//     const ry = az * bx - ax * bz;
+//     const rz = ax * by - ay * bx;
+//     return [rx, ry, rz];
+// } 
+// function length(x, y, z) {
+//     return Math.sqrt(x * x + y * y + z * z);
+// }
+// function minus(a, b) {
+//     const ax = a[0],
+//       ay = a[1],
+//       az = a[2],
+//       bx = b[0],
+//       by = b[1],
+//       bz = b[2];
+  
+//     const rx = ax - bx;
+//     const ry = ay - by;
+//     const rz = az - bz;
+//     return [rx, ry, rz];
+// }
+
+// var e = new THREE.Vector3(0, 0, 1);
+// var start = new THREE.Vector3(32, 0, 0);
+// var k = (4 * Math.PI * Math.pow(10, -7) * 30 * 1000) / 2 * Math.PI * 2;
+// const parallelPoint = new THREE.Vector3(30, 0, 0);
+// for(let i = 0; i < 2; i++){
+//     var vect = new THREE.ArrowHelper(e, start, 1, 0xffff00);
+//     start = new THREE.Vector3().addVectors(start, e.multiplyScalar(1));
+//     e = new THREE.Vector3().subVectors(start, parallelPoint);
+//     e.normalize();
+//     console.log(vect.position, e, k)
+//     scene.add(vect);
+// }
+
+// // Создаем материал для векторов
+// var materiall = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+
+// // Создаем геометрию для векторов
+// var geometry = new THREE.ConeGeometry(0.12, 0.36, 8);
+
+// // Создаем векторы
+// var vectors = [];
+// var centerPoint = new THREE.Vector3(30, 0, 0);
+// var distance = 1;
+
+// // Создаем векторы вокруг точки
+// for (var i = 0; i < 12; i++) {
+//     var angle = i * Math.PI / 6; // 360 / 12 = 30 degrees
+//     var x = centerPoint.x + distance * Math.cos(angle);
+//     var y = centerPoint.y + distance * Math.sin(angle);
+//     var endPoint = new THREE.Vector3(x, y, centerPoint.z);
+    
+//     var direction = endPoint.clone().sub(centerPoint).normalize();
+//     var arrow = new THREE.ArrowHelper(direction, centerPoint, distance, 0xff0000, 0.12, 0.36);
+//     scene.add(arrow);
+//     vectors.push(arrow);
+// }
+
+function radiansToDegrees(radians) {
+    return radians * (180 / Math.PI);
 }
-function minus(a, b) {
-    const ax = a[0],
-      ay = a[1],
-      az = a[2],
-      bx = b[0],
-      by = b[1],
-      bz = b[2];
-  
-    const rx = ax - bx;
-    const ry = ay - by;
-    const rz = az - bz;
-    return [rx, ry, rz];
-} 
+
+function angleBetweenVectors(vector1, vector2) {
+    vector1.normalize();
+    vector2.normalize();
+
+    let dotProduct = vector1.dot(vector2);
+
+    let angleRadians = Math.acos(dotProduct);
+
+    return angleRadians;
+}
+
 
 function updatePointInFront(db) {
     db.ref('Ivitka').once('value').then(snapshot => {
@@ -173,37 +221,44 @@ function updatePointInFront(db) {
         db.ref('Rvitka').once('value').then(snapshot => {
             const Rvitka = snapshot.val();
             const direction = new THREE.Vector3();
-
+            const center = new THREE.Vector3(30, 0, 0)
             mesh.getWorldDirection(direction.set());
             direction.multiplyScalar(1.5);
-            var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
-            const n = 1000;
-            var s = [0, 0, 0];
-            const pointVyvod = mesh.position.clone().add(direction)
-            const point = mesh.position.clone().add(direction).multiplyScalar(Rvitka / 30);
-            for (let i = 0; i < 2 * n; i++){
-                const alpha = Math.PI * i / n;
-                const alpha_next = Math.PI * (i + 1) / n;
-                const m_x = Rvitka * Math.cos(alpha);
-                const m_y = Rvitka * Math.sin(alpha);
-                const m_z = 0;
-                const m_next_x = Rvitka * Math.cos(alpha_next);
-                const m_next_y = Rvitka * Math.sin(alpha_next);
-                const m_next_z = 0;
-                const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
-                const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
-                var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
-                prod[0] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
-                prod[1] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
-                prod[2] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
-                s[0] += prod[0];
-                s[1] += prod[1];  
-                s[2] += prod[2];   
-            }
-            // var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))]
-            var res2 = length(s[0], s[1], s[2]);
-            var res = res1 * res2 * 1000
-            console.log(res1 * res2 * 1000);
+            const point = mesh.position.clone().add(direction);
+            const vectorToPoint = new THREE.Vector3(30, 0, 0).sub(mesh.position);
+            const angleRadians = angleBetweenVectors(vectorToPoint, direction);
+            const angleDegrees = radiansToDegrees(angleRadians);
+            const distance = center.distanceTo(mesh.position);
+            const k = (4 * Math.PI * Math.pow(10, -7) * 30 * 1000) / (2 * Math.PI * distance / 100);
+            var res = k * Math.sin(angleRadians) * 1000;
+            console.log("Угол между векторами:", angleDegrees, res);
+            // var res1 = (Math.PI * 133 * Ivitka * 1000) / (Math.sqrt(2) * Math.pow(10, 8));
+            // const n = 1000;
+            // var s = [0, 0, 0];
+            // const pointVyvod = mesh.position.clone().add(direction)
+            
+            // for (let i = 0; i < 2 * n; i++){
+            //     const alpha = Math.PI * i / n;
+            //     const alpha_next = Math.PI * (i + 1) / n;
+            //     const m_x = Rvitka * Math.cos(alpha);
+            //     const m_y = Rvitka * Math.sin(alpha);
+            //     const m_z = 0;
+            //     const m_next_x = Rvitka * Math.cos(alpha_next);
+            //     const m_next_y = Rvitka * Math.sin(alpha_next);
+            //     const m_next_z = 0;
+            //     const dl = minus([m_next_x, m_next_y, m_next_z], [m_x, m_y, m_z]);
+            //     const dr = minus([point.x, point.y, point.z], [m_x, m_y, m_z]);
+            //     var prod = cross([dl[0], dl[1], dl[2]], [dr[0], dr[1], dr[2]]);
+            //     prod[0] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+            //     prod[1] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+            //     prod[2] *= Math.pow(length(dr[0], dr[1], dr[2]), -3);
+            //     s[0] += prod[0];
+            //     s[1] += prod[1];  
+            //     s[2] += prod[2];   
+            // }
+            // // var I = [s[0] * (1 / (2 * n)), s[1] * (1 / (2 * n)), s[2] * (1 / (2 * n))]
+            // var res2 = length(s[0], s[1], s[2]);
+            // console.log(res1 * res2 * 1000, point);
 
             //document.getElementById('Ez').textContent = res.toFixed(2)
             //document.getElementById('X-coord').textContent = pointVyvod.x.toFixed(3)   
@@ -257,7 +312,6 @@ scene.add(line);
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 let mouseDown = false;
-let isCameraTransformed = false;
 let mousewheel = false;
 let prevMousePos = { x: 0, y: 0 };
 
