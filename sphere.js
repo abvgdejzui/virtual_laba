@@ -261,15 +261,15 @@ function updatePointInFront(db) {
             mesh.getWorldDirection(direction.set());
             direction.multiplyScalar(1.5);
             const point = mesh.position.clone().add(direction);
-            let res = getU(Rvitka / 100, Ivitka / 1000, new Vector3(mesh.position.x, mesh.position.y, mesh.position.z), new Vector3(point.x, point.y, point.z));
-            console.log("U:", res * 1000);
+            var res = getU(Rvitka, Ivitka / 1000, new Vector3(Rvitka * (mesh.position.x / 30), mesh.position.y, mesh.position.z), new Vector3(Rvitka * (point.x / 30), point.y, point.z)) * 1000 * 100;
+            console.log("U:", res);
             
             // Отправляем сообщение в родительское окно
             window.parent.postMessage({
                 type: 'updateCoordinates',
-                res: res.toFixed(2),
-                x: mesh.position.x.toFixed(3),
-                z: mesh.position.z.toFixed(3)            
+                res: res.toFixed(0),
+                x: (Rvitka * (mesh.position.x / 30)).toFixed(3),
+                z: (Rvitka * (mesh.position.z / 30)).toFixed(3)            
             }, '*');
                     });
                 });
@@ -384,22 +384,22 @@ document.addEventListener('mousemove', event => {
     if (mouseDown) {
         switch (cameraMode) {
             case 0:
-                mesh.position.z += (deltaMove.x * 0.06) * -1;
-                mesh.position.x += (deltaMove.y * 0.07) * 1;
+                mesh.position.z += (deltaMove.x * 0.03) * -1;
+                mesh.position.x += (deltaMove.y * 0.03) * 1;
                 break;
             case 1:
-                mesh.position.x += deltaMove.x * 0.04;
-                mesh.position.z += (deltaMove.y * 0.04);
+                mesh.position.x += deltaMove.x * 0.03;
+                mesh.position.z += (deltaMove.y * 0.03);
                 break;
             case 2:
-                 mesh.position.x += deltaMove.x * 0.04;
-                 mesh.position.z += (deltaMove.y * 0.04);
+                 mesh.position.x += deltaMove.x * 0.03;
+                 mesh.position.z += (deltaMove.y * 0.03);
                  break;
         }
     }
 
     if (mousewheel) {
-        mesh.rotation.y -= (deltaMove.x * 0.07) * -1;
+        mesh.rotation.y -= (deltaMove.x * 0.01) * -1;
     }
 
     updatePointInFront(db);
