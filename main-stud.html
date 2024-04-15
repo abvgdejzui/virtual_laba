@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prosto+One&display=swap" rel="stylesheet">
+
+  <title>3D Sphere Rotation</title>
+</head>
+<body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+  <script src = "firebase.js"></script>
+  <script src="app.js"></script>
+  
+  <div id="Information">
+    <div id="info-back"></div>
+    <div id="info-modal">
+      <ul class="menu-bar" id="menu">
+        <li id="instruct-head" onclick="infoInstruction()">Инструкция</li>
+        <li id="laba-head" onclick="infoLaba()">Лабораторная установка</li>
+        <li id="contact-head" onclick="infoContact()">Контакты</li>
+        <li onclick="closeInfo()" id="close-info">Закрыть</li>
+      </ul>
+
+      <div id="info-instruction">
+        <p>Чтобы переключить камеру, воспользуйтесь стрелками на клавиатуре.</p>
+        <p>Чтобы повернуть датчик, воспользуйтесь колёсиком мыши.</p>
+        <p>Нажав <i>Enter</i>, вы можете записать показание, не нажимая зелёную кнопку.</p>
+      </div>
+
+      <div id="info-laba">
+        <p>В данной установке используется виток и катушка.</p>
+        <p>Данная лабораторная установка подходит для лабораторных работ №12, №13, №14</p>
+      </div>
+
+      <div id="info-contact">
+        <p>Виртуальную лабораторную работу разработали студенты СПБГЭТУ "ЛЭТИ" группы 3374 Урусов А., Гренадерова А.,  Владимирская А. под руководством Чирцова Александра Сергеевича.</p>
+      </div>
+
+    </div>
+</div>
+
+  <div class="container">
+      <div class="column">
+        <div class="knopka">
+          <button class="custom-btn btn-1" onclick="exit()">Выход</button>
+        </div>
+          <div id="pokazanie">
+              <p id="pokazanieHead">Показания</p>
+              <div id="pokazanieBlock">
+                <p id="const">
+                  f<sub>k</sub> = <span id="Fk">1</span> кГц;             
+                I<sub>k</sub>&nbsp;=&nbsp;<span id="Ik">50</span>&nbsp;мА;
+                U<sub>k</sub>&nbsp;=&nbsp;<span id="Uk">10</span>&nbsp;В;
+                R<sub>&nbsp;витка</sub>&nbsp;=&nbsp;<span id="Rv">13</span>&nbsp;см;
+                </p>
+                <ol id="pokazanieText"> </ol>
+              </div>
+              
+              <div class="knopka">
+               <button class="custom-btn btn-5" onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
+              </div>
+          </div>
+      </div>        
+
+      <div class="column">
+        <header>
+          <span id="header" >Виток с током</span>
+          <span id="info">
+            <button class="custom-btn btn-4" onclick="getInfo()">Информация об установке</button>
+          </span>
+        </header>
+
+        <div id="data">
+          <object data="script.html"  ></object>
+        </div>
+        
+        <div>
+          <table>
+            <tr>
+              <td>
+                <div class="table-element">I в витке =&nbsp;<span id="I_vitk">50</span>&nbsp;мА
+                </div>
+              </td>
+              <td> <div class="table-element">
+                R витка =&nbsp;<span id="R_vitk">13</span>                
+                &nbsp;см </div>
+              </td>
+              <td>
+                <button class="custom-btn btn-6" onclick="save_IR()">Сохранить</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="coords">
+          <p>Координаты датчика:</p>
+          <p> X: <span id="X-coord">35.000</span> <br>
+            Y: <span id="Y-coord">-2.500</span> <br>
+            
+          </p>
+        </div>
+
+        <div class="Pokazatel">
+          <h3> Текущие показатели: </h3>
+          <br>
+          <div id="window">
+            <p>
+              f<sub>k</sub> = <span id="Fk">1</span> кГц
+              &nbsp;&nbsp;&nbsp;
+              I<sub>k</sub> = <span id="Ik">50</span> мА
+            </p>
+
+            <p>
+              E<sub>з</sub> = <span id="Ez">95.26</span> мВ
+              &nbsp;&nbsp;
+              U<sub>k</sub> = <span id="Uk">13</span> В
+              
+            </p>
+          </div>
+          <br>
+          <div class="switch-container">
+            <img src="css/pics/off.jpg" alt="switch" id="switch">
+          </div>
+        </div>
+        <div class="knopka">
+          <button class="custom-btn btn-2" onclick="record()">Записать</button>
+        </div>
+        
+      </div>
+  </div>
+</body>
+</html>
