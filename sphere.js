@@ -353,16 +353,6 @@ document.addEventListener('keydown', function(event) {
 
         materialKrug.needsUpdate = true; // Обновляем материал
     }
-    
-    else if (event.key === 'Enter') {
-        const direction = new THREE.Vector3();
-        mesh.getWorldDirection(direction.set());
-        direction.multiplyScalar(1.5);
-        const point = mesh.position.clone().add(direction);
-
-        // Создаем куб на координатах точки
-        createCubeAtPoint(point);
-    }
 });
 
 
