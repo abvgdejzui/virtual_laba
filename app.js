@@ -135,9 +135,11 @@ function record() {
         var A = document.getElementById('Ik').textContent;
     var B = document.getElementById('Uk').textContent;
     var C = document.getElementById('Ez').textContent;
+    var x = document.getElementById('X-coord').textContent;
+    var y = document.getElementById('Y-coord').textContent;
     var fixedValues = document.getElementById('pokazanieText');
     var newRecord = document.createElement('li');
-    newRecord.textContent = `Ik=${A} Uk=${B} Ez=${C}`;
+    newRecord.textContent = `Ik=${A} Uk=${B} Ez=${C}; Координаты по x:${x}, по y:${y}`;
     fixedValues.appendChild(newRecord);
     }
     else {
