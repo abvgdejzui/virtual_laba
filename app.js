@@ -8,7 +8,7 @@ function signIn() {
         .then((userCredential) => {
             var user = userCredential.user;
             console.log("Signed in as:", user.email);
-            window.location.href = 'main.html';
+            window.location.href = 'frontir.html';
         })
         .catch((error) => {
             alert('Неверный пароль. Попробуйте еще раз.');
