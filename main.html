@@ -54,9 +54,16 @@
         </div>
           <div id="pokazanie">
               <p id="pokazanieHead">Показания</p>
-              <ol id="pokazanieText">
-                
-              </ol>
+              <div id="pokazanieBlock">
+                <p id="const">
+                  f<sub>k</sub> = <span id="Fk">1</span> кГц;             
+                I<sub>k</sub>&nbsp;=&nbsp;<span id="Ik">50</span>&nbsp;мА;
+                U<sub>k</sub>&nbsp;=&nbsp;<span id="Uk">10</span>&nbsp;В;
+                R<sub>&nbsp;витка</sub>&nbsp;=&nbsp;<span id="Rv">13</span>&nbsp;см;
+                </p>
+                <ol id="pokazanieText"> </ol>
+              </div>
+              
               <div class="knopka">
                <button class="custom-btn btn-5" onclick="downloadFile(), gotovoExit()" id="gotovo">Скачать файл</button>
               </div>
@@ -80,12 +87,12 @@
             <tr>
               <td>
                 <div class="table-element">I в витке = 
-                <input type="number" id="I_vitk" placeholder="Введите I">
+                <input type="number" id="I_vitk" placeholder="Введите I" value="50" min="0.001" max="1000">
                  мА</div>
               </td>
               <td> <div class="table-element">
                 R витка = 
-                <input type="number" id="R_vitk" placeholder="Введите R">
+                <input type="number" id="R_vitk" placeholder="Введите R" value="13" min="0.001" max="1000">
                  см </div>
               </td>
               <td>
