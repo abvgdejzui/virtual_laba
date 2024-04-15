@@ -21,5 +21,5 @@ document.getElementById('login').addEventListener('click', function(event) {
 
 
 function redirectStudent() {
-    window.location.href = "main.html"; // Замените на URL вашей страницы
+    window.location.href = "main-stud.html"; // Замените на URL вашей страницы
 }
