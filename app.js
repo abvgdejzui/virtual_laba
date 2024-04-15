@@ -35,8 +35,9 @@ function save_IR() {
     var Ik = document.getElementById('Ik');
     Ik.textContent = Ivitka
 
-    var Uk = document.getElementById('Uk');
-    Uk.textContent = Rvitka
+    var Rv = document.getElementById('Rv');
+    Rv.textContent = Rvitka
+
 
     //var Ez = document.getElementById('Ez');
     //Ez.textContent = Ezonda.toFixed(2) //округл до двух символов
@@ -45,25 +46,39 @@ function save_IR() {
 
 // качалка показаний
 function downloadFile() {
-    // Получаем элемент с ID 'pokazanieText'
-    var olElement = document.getElementById('pokazanieText');
-    // Получаем все элементы <li> внутри <ol>
-    var liElements = olElement.getElementsByTagName('li');
-    var data = '';
-    for (var i = 0; i < liElements.length; i++) {
-        // Добавляем нумерацию к каждому элементу списка
-        data += (i + 1) + '. ' + liElements[i].innerText + "\n";
-    }
-
-    var blob = new Blob([data], {type: 'text/plain'});
-    var url = window.URL.createObjectURL(blob);
-    var link = document.createElement('a');
-    link.href = url;
-    link.download = 'Показания.txt'; // Имя файла
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Получаем элемент с ID 'pokazanieBlock'
+      var pokazanieBlock = document.getElementById('pokazanieBlock');
+      // Получаем элементы с определенными ID внутри 'pokazanieBlock
+      var FkElement = pokazanieBlock.querySelector('#Fk');
+      var IkElement = pokazanieBlock.querySelector('#Ik');
+      var RvElement = pokazanieBlock.querySelector('#Rv');
+      var UkElement = pokazanieBlock.querySelector('#Uk');
+      // Получаем все элементы <li> внутри <ol> внутри 'pokazanieBlock'
+      var liElements = pokazanieBlock.querySelectorAll('ol#pokazanieText li');
+      var data = '';
+  
+      // Добавляем содержимое элементов с определенными ID
+      
+      data += 'fk = ' + FkElement.innerText + ' кГц;\n';
+      data += 'Ik = ' + IkElement.innerText + ' мА;\n';
+      data += 'Uk = ' + UkElement.innerText + ' В;\n\n';
+      data += 'R витка = ' + RvElement.innerText + ' см;\n';
+  
+      // Добавляем содержимое каждого элемента <li>
+      for (var i = 0; i < liElements.length; i++) {
+          // Убедимся, что каждый элемент списка начинается с новой строки
+          data += (i + 1) + '. ' + liElements[i].innerText + "\n";
+      }
+  
+      var blob = new Blob([data], {type: 'text/plain'});
+      var url = window.URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'Показания.txt'; // Имя файла
+  
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 }
 
 
@@ -131,15 +146,14 @@ function infoContact(){
 // Записать показания //
 function record() {
 
-    if (document.getElementById('window').style.color == 'lawngreen') {
-        var A = document.getElementById('Ik').textContent;
-    var B = document.getElementById('Uk').textContent;
+if (document.getElementById('window').style.color == 'lawngreen') {
+        
     var C = document.getElementById('Ez').textContent;
     var x = document.getElementById('X-coord').textContent;
     var y = document.getElementById('Y-coord').textContent;
     var fixedValues = document.getElementById('pokazanieText');
     var newRecord = document.createElement('li');
-    newRecord.textContent = `Ik=${A} Uk=${B} Ez=${C}; Координаты по x:${x}, по y:${y}`;
+    newRecord.textContent = `Ez=${C}; \nx:${x},  y:${y}`;
     fixedValues.appendChild(newRecord);
     }
     else {
