@@ -269,7 +269,8 @@ function updatePointInFront(db) {
                 type: 'updateCoordinates',
                 res: res.toFixed(0),
                 x: (Rvitka * (mesh.position.x / 30)).toFixed(3),
-                z: (Rvitka * (mesh.position.z / 30)).toFixed(3)            
+                z: (Rvitka * (mesh.position.z / 30)).toFixed(3),
+                delenie: (Rvitka / 30).toFixed(3)       
             }, '*');
                     });
                 });

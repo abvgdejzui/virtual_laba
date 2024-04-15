@@ -14,6 +14,14 @@ function signIn() {
             alert('Неверный пароль. Попробуйте еще раз.');
         });
 }
+db.ref('Ivitka').once('value').then(snapshot => {
+    const Ivitka = snapshot.val();
+    db.ref('Rvitka').once('value').then(snapshot => {
+        const Rvitka = snapshot.val();
+        document.getElementById('I_vitk').value = Ivitka; //получаем из формы
+        document.getElementById('R_vitk').value = Rvitka;
+                });
+            });
 
 function save_IR() {
     var Ivitka = document.getElementById('I_vitk').value; //получаем из формы
@@ -144,6 +152,7 @@ window.addEventListener('message', function(event) {
         document.getElementById('Ez').textContent = event.data.res;
         document.getElementById('X-coord').textContent = event.data.x;
         document.getElementById('Y-coord').textContent = event.data.z;
+        document.getElementById('delenie').textContent = event.data.delenie;
     }
 });
 
