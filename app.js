@@ -61,7 +61,7 @@ function downloadFile() {
       
       data += 'fk = ' + FkElement.innerText + ' кГц;\n';
       data += 'Ik = ' + IkElement.innerText + ' мА;\n';
-      data += 'Uk = ' + UkElement.innerText + ' В;\n\n';
+      data += 'Uk = ' + UkElement.innerText + ' В;\n';
       data += 'R витка = ' + RvElement.innerText + ' см;\n';
   
       // Добавляем содержимое каждого элемента <li>
