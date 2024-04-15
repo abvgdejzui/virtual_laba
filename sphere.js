@@ -270,7 +270,9 @@ function updatePointInFront(db) {
                 res: res.toFixed(0),
                 x: (Rvitka * (mesh.position.x / 30)).toFixed(3),
                 z: (Rvitka * (mesh.position.z / 30)).toFixed(3),
-                delenie: (Rvitka / 30).toFixed(3)       
+                delenie: (Rvitka / 30).toFixed(3),
+                Iv: Ivitka,
+                Rv: Rvitka
             }, '*');
                     });
                 });

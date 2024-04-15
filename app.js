@@ -20,6 +20,7 @@ db.ref('Ivitka').once('value').then(snapshot => {
         const Rvitka = snapshot.val();
         document.getElementById('I_vitk').value = Ivitka; //получаем из формы
         document.getElementById('R_vitk').value = Rvitka;
+        console.log(document.getElementById('I_vitk').value);
                 });
             });
 
@@ -31,9 +32,6 @@ function save_IR() {
 
     res1 = (41783 * Ivitka / 1000) / (Math.sqrt(2) * Math.pow(10, 8));
     Ezonda = res1*10000 //домножила
-
-    var Ik = document.getElementById('Ik');
-    Ik.textContent = Ivitka
 
     var Rv = document.getElementById('Rv');
     Rv.textContent = Rvitka
@@ -169,6 +167,10 @@ window.addEventListener('message', function(event) {
         document.getElementById('X-coord').textContent = event.data.x;
         document.getElementById('Y-coord').textContent = event.data.z;
         document.getElementById('delenie').textContent = event.data.delenie;
+        document.getElementById('Ik2').textContent = event.data.Iv;
+        document.getElementById('Ik').textContent = event.data.Iv;
+        document.getElementById('I_vitk').textContent = event.data.Iv;
+        document.getElementById('R_vitk').textContent = event.data.Rv;
     }
 });
 
