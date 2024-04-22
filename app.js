@@ -171,6 +171,7 @@ window.addEventListener('message', function(event) {
         document.getElementById('Ik').textContent = event.data.Iv;
         document.getElementById('I_vitk').textContent = event.data.Iv;
         document.getElementById('R_vitk').textContent = event.data.Rv;
+        document.getElementById('Rv').textContent = event.data.Rv;
     }
 });
 
