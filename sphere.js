@@ -1,19 +1,19 @@
+// Импорт библиотек Three.js и STLLoader
 import * as THREE from './build/three.module.js';
 import { STLLoader } from './build/STLLoader.js';
 
+// Создание загрузчика STL-файлов, сцены, камеры и рендера
 const loader = new STLLoader();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(50, 14, 12);
-camera.rotation.set(-0.6,0.8,0.5);
+camera.position.set(50, 14, 12); // Установка позиции камеры
+camera.rotation.set(-0.6, 0.8, 0.5); // Установка вращения камеры
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.setSize(window.innerWidth, window.innerHeight); // Установка размера рендера
+document.body.appendChild(renderer.domElement); // Добавление канваса рендера в документ
 
-/////////////////////////////////////////////////////////////
-
-// *** задаю кольцо ***
+// Создание материала для модели "Krug"
 var materialKrug = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
     metalness: 1,
@@ -25,17 +25,18 @@ var materialKrug = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25,
     emissive: 0xAf1100
 })
+
 let meshKrug;
-loader.load('./models/krug.stl', function (geometry){
+loader.load('./models/krug.stl', function (geometry) {
     meshKrug = new THREE.Mesh(geometry, materialKrug);
-    geometry.scale(0.3,0.3,0.3)
-    meshKrug.rotation.x = -Math.PI / 2;
-    meshKrug.position.z = 0.75;
-    meshKrug.renderOrder = 1;
-    scene.add(meshKrug);
+    geometry.scale(0.3, 0.3, 0.3); // Масштабирование геометрии
+    meshKrug.rotation.x = -Math.PI / 2; // Вращение модели
+    meshKrug.position.z = 0.75; // Установка позиции модели
+    meshKrug.renderOrder = 1; // Установка порядка рендера
+    scene.add(meshKrug); // Добавление модели в сцену
 });
 
-// *** задаю стол ***
+// Создание материала для модели "Stol"
 const materialStol = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
     metalness: 1,
@@ -47,19 +48,19 @@ const materialStol = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25,
     emissive: 0xFF8C00,
 })
-let meshStol;
-loader.load('./models/stol.stl', function (geometry){
-    geometry.scale(0.4,0.4,0.4)
-    meshStol = new THREE.Mesh(geometry, materialStol);
-    scene.add(meshStol);
-    meshStol.rotation.x = -Math.PI / 2;
-    meshStol.position.y = -1;
-    meshStol.position.x = 0;
-    meshStol.geometry.computeBoundingBox();
 
+let meshStol;
+loader.load('./models/stol.stl', function (geometry) {
+    geometry.scale(0.4, 0.4, 0.4); // Масштабирование геометрии
+    meshStol = new THREE.Mesh(geometry, materialStol);
+    scene.add(meshStol); // Добавление модели в сцену
+    meshStol.rotation.x = -Math.PI / 2; // Вращение модели
+    meshStol.position.y = -1; // Установка позиции модели
+    meshStol.position.x = 0; // Установка позиции модели
+    meshStol.geometry.computeBoundingBox(); // Вычисление ограничивающего блока
 })
 
-// *** задаю оси y ***
+// Создание материала для оси Y
 const materialOsiY = new THREE.MeshPhysicalMaterial({
     color: 0xFF0000,
     metalness: 1,
@@ -69,18 +70,19 @@ const materialOsiY = new THREE.MeshPhysicalMaterial({
     transmission: 0.99,
     clearcoat: 1.0,
     clearcoatRoughness: 0.25,
-    emissive: 0x0000CD,            //тут оси у красятся
-})
-let meshOsiY;
-loader.load('./models/osi.stl', function (geometry){
-    geometry.scale(0.3,0.3,0.3)
-    meshOsiY = new THREE.Mesh(geometry, materialOsiY);
-    scene.add(meshOsiY);
-    meshOsiY.rotation.x = -Math.PI / 2;
-    meshOsiY.position.y = 0.01;
+    emissive: 0x0000CD,
 })
 
-// *** задаю ось х ***
+let meshOsiY;
+loader.load('./models/osi.stl', function (geometry) {
+    geometry.scale(0.3, 0.3, 0.3); // Масштабирование геометрии
+    meshOsiY = new THREE.Mesh(geometry, materialOsiY);
+    scene.add(meshOsiY); // Добавление модели в сцену
+    meshOsiY.rotation.x = -Math.PI / 2; // Вращение модели
+    meshOsiY.position.y = 0.01; // Установка позиции модели
+})
+
+// Создание материала для оси X
 const materialOsiX = new THREE.MeshPhysicalMaterial({
     color: 0xFF0000,
     metalness: 1,
@@ -90,19 +92,19 @@ const materialOsiX = new THREE.MeshPhysicalMaterial({
     transmission: 0.99,
     clearcoat: 1.0,
     clearcoatRoughness: 0.25,
-    emissive: 0xFF0000,              //тут ось х красятся
+    emissive: 0xFF0000,
 })
+
 let meshOsiX;
-loader.load('./models/osi_sr.stl', function (geometry){
-    geometry.scale(0.3,0.3,0.3)
+loader.load('./models/osi_sr.stl', function (geometry) {
+    geometry.scale(0.3, 0.3, 0.3); // Масштабирование геометрии
     meshOsiX = new THREE.Mesh(geometry, materialOsiX);
-    scene.add(meshOsiX);
-    meshOsiX.rotation.x = -Math.PI / 2;
-    meshOsiX.position.y = 0.012;
+    scene.add(meshOsiX); // Добавление модели в сцену
+    meshOsiX.rotation.x = -Math.PI / 2; // Вращение модели
+    meshOsiX.position.y = 0.012; // Установка позиции модели
 })
 
-
-// *** задаю датчик ***
+// Создание материала для основной модели
 const material = new THREE.MeshPhysicalMaterial({
     color: 0xAf1100,
     metalness: 1,
@@ -113,74 +115,56 @@ const material = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25,
     emissive: 0x696969
 })
+
 let mesh;
-loader.load('./models/model.stl', function (geometry){
-    geometry.scale(0.1,0.1,0.1)
+loader.load('./models/model.stl', function (geometry) {
+    geometry.scale(0.1, 0.1, 0.1); // Масштабирование геометрии
     mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = 35;
-    mesh.position.z = -4;
-    scene.add(mesh);
+    mesh.position.x = 35; // Установка позиции модели
+    mesh.position.z = -4; // Установка позиции модели
+    scene.add(mesh); // Добавление модели в сцену
 });
 
-function createCubeAtPoint(point) {
-    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.copy(point);
-    scene.add(cube);
-}
-
-///////////////////////////////////////////////////////////////////////
-
-// Constants
-const mu_priv = 1e-7; // Coefficient equal to mu0/4pi
+// Константы и функции для вычислений индукции магнитного поля и напряжения
+const mu_priv = 1e-7;
 const pi = Math.PI;
-const NP = 360; // Number of points dividing the circle
+const NP = 360;
+const V1 = 400;
+const V2 = 1900;
+const S = 0.7 * 1e-4;
+const f = 1000;
 
-const V1 = 400; // Number of turns in the big "coil"
-const V2 = 1900; // Number of turns in the sensor coil
-const S = 0.7 * 1e-4; // Area of the sensor coil section (0.7 cm^2 -> in m^2)
-const f = 1000; // Frequency of the current in the big "coil"
-
-// Vector structure
 function Vector3(x, y, z) {
     this.x = x;
     this.y = y;
     this.z = z;
 }
 
-// Vector addition
 function add(v, w) {
     return new Vector3(v.x + w.x, v.y + w.y, v.z + w.z);
 }
 
-// Vector subtraction
 function subtract(v, w) {
     return new Vector3(v.x - w.x, v.y - w.y, v.z - w.z);
 }
 
-// Scalar multiplication
 function multiply(v, a) {
     return new Vector3(v.x * a, v.y * a, v.z * a);
 }
 
-// Dot product
 function dot(v, w) {
     return v.x * w.x + v.y * w.y + v.z * w.z;
 }
 
-// Cross product
 function cross(v, w) {
     return new Vector3(v.y * w.z - v.z * w.y, -v.x * w.z + v.z * w.x, v.x * w.y - v.y * w.x);
 }
 
-// Vector length
 function len(v) {
     return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-// Function to calculate B in point D
-// Ring in the x-y plane with radius R0 and current I
+// Функция для вычисления индукции магнитного поля
 function getB(R0, I, D) {
     let res = new Vector3(0, 0, 0);
     let phi1 = 2 * pi / NP;
@@ -200,8 +184,7 @@ function getB(R0, I, D) {
     return res;
 }
 
-// Function to calculate U in the sensor
-// With center D and probe D1
+// Функция для вычисления напряжения
 function getU(R0, I, D, D1) {
     let B = getB(R0, I, D);
     let n = subtract(D1, D);
@@ -210,48 +193,7 @@ function getU(R0, I, D, D1) {
     return Math.sqrt(2) * pi * f * V2 * S * Bpr;
 }
 
-// // Main function
-// function main() {
-//     let R0 = 0.13;
-//     let I = 0.05; // Total current through all turns
-//     let Bzt = mu_priv * 2 * pi * I * V1 / R0;
-//     let U, alpha;
-//     let B = new Vector3(0, 0, 0);
-//     let D = new Vector3(0, 0, 0);
-//     let D1 = new Vector3(0, 0, 0);
-
-//     B = getB(R0, I, D);
-//     console.log("In the center of the ring:");
-//     console.log("B_z (calc) = " + B.z);
-//     console.log("B_z (theor) = " + Bzt);
-//     console.log("Ratio: " + Bzt / B.z);
-
-//     D = new Vector3(0, 0, 0);
-//     D1 = new Vector3(0, 0, 0.01);
-//     console.log("Along the diameter of the ring, DD1 directed along the z-axis:");
-//     for (D.x = -R0 + 0.01; D.x < R0; D.x += 0.01) {
-//         D1.x = D.x;
-//         U = getU(R0, I, D, D1);
-//         console.log("x = " + D.x + ", U (mV) = " + U * 1000);
-//     }
-
-//     D = new Vector3(0, 0, 0);
-//     D1 = new Vector3(0, 0, 0);
-//     console.log("In the center of the ring, in different directions of DD1:");
-//     for (let k = 0; k < 12; k++) {
-//         alpha = 2 * pi * k / 12;
-//         D1.x = Math.cos(alpha);
-//         D1.z = Math.sin(alpha);
-//         U = getU(R0, I, D, D1);
-//         console.log("alpha = " + alpha / pi + "*pi, U (mV) = " + U * 1000);
-//     }
-// }
-
-// // Run the main function
-// main();
-
-
-
+// Функция обновления точки перед моделью
 function updatePointInFront(db) {
     db.ref('Ivitka').once('value').then(snapshot => {
         const Ivitka = snapshot.val();
@@ -263,8 +205,7 @@ function updatePointInFront(db) {
             const point = mesh.position.clone().add(direction);
             var res = getU(Rvitka, Ivitka / 1000, new Vector3(Rvitka * (mesh.position.x / 30), mesh.position.y, mesh.position.z), new Vector3(Rvitka * (point.x / 30), point.y, point.z)) * 1000 * 100;
             console.log("U:", res);
-            
-            // Отправляем сообщение в родительское окно
+
             window.parent.postMessage({
                 type: 'updateCoordinates',
                 res: res.toFixed(0),
@@ -274,18 +215,14 @@ function updatePointInFront(db) {
                 Iv: Ivitka,
                 Rv: Rvitka
             }, '*');
-                    });
-                });
+        });
+    });
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Создаем сегменты
+// Создание сетки для сцены
 var geometrySetka = new THREE.BufferGeometry();
 const points = [];
 
-// Делим верхнюю и нижнюю сетки на 50 сегментов
 const numSegments = 50;
 const segmentLength = 50 / numSegments;
 for (let i = 0; i <= numSegments; i++) {
@@ -296,7 +233,6 @@ for (let i = 0; i <= numSegments; i++) {
     points.push(new THREE.Vector3(50 - (i * segmentLength), 0, -25));
 }
 
-// Создаем вертикальные сегменты
 const numVertSegments = 50;
 const vertSegmentLength = 50 / numVertSegments;
 for (let i = 0; i < numVertSegments; i++) {
@@ -311,8 +247,7 @@ var materialSetka = new THREE.LineBasicMaterial({ color: 0x8B4513 });
 var line = new THREE.Line(geometrySetka, materialSetka);
 scene.add(line);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Обработка событий мыши и клавиатуры для управления камерой и объектами
 let mouseDown = false;
 let mousewheel = false;
 let prevMousePos = { x: 0, y: 0 };
@@ -326,19 +261,17 @@ document.addEventListener('mousedown', event => {
     }
 });
 
-// Инициализация переменной cameraMode
 let cameraMode = 0;
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft'){ 
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         cameraMode = (event.key === 'ArrowRight') ? (cameraMode + 1) : (cameraMode - 1);
-        cameraMode = (cameraMode + 3) % 3; // 3 - количество режимов
+        cameraMode = (cameraMode + 3) % 3;
 
-        // Устанавливаем параметры камеры в зависимости от текущего режима
         switch (cameraMode) {
             case 0:
                 camera.position.set(50, 14, 12);
-                camera.rotation.set(-0.6,0.8,0.5);
+                camera.rotation.set(-0.6, 0.8, 0.5);
                 materialKrug.opacity = 0.9;
                 break;
             case 1:
@@ -353,10 +286,9 @@ document.addEventListener('keydown', function(event) {
                 break;
         }
 
-        materialKrug.needsUpdate = true; // Обновляем материал
+        materialKrug.needsUpdate = true;
     }
 });
-
 
 document.addEventListener('mouseup', event => {
     if (event.button === 0) {
@@ -385,9 +317,9 @@ document.addEventListener('mousemove', event => {
                 mesh.position.z += (deltaMove.y * 0.03);
                 break;
             case 2:
-                 mesh.position.x += deltaMove.x * 0.03;
-                 mesh.position.z += (deltaMove.y * 0.03);
-                 break;
+                mesh.position.x += deltaMove.x * 0.03;
+                mesh.position.z += (deltaMove.y * 0.03);
+                break;
         }
     }
 
@@ -399,10 +331,10 @@ document.addEventListener('mousemove', event => {
     prevMousePos = { x: event.offsetX, y: event.offsetY };
 });
 
-// Функция анимации
+// Функция анимации для обновления сцены
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
 
-animate();
+animate(); // Запуск анимации

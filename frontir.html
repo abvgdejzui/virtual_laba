@@ -117,13 +117,11 @@
                  мА</div>
                   <script>
                       var inputField = document.getElementById('I_vitk');
-                      // Проверяем введенное значение на валидность при потере фокуса
                       inputField.addEventListener('blur', function(e) {
                           var min = parseFloat(this.min);
                           var max = parseFloat(this.max);
                           var value = parseFloat(this.value);
                   
-                          // Если значение меньше min или больше max, устанавливаем его равным min или max соответственно
                           if (value < min) {
                               this.value = min;
                           } else if (value > max) {
@@ -138,13 +136,11 @@
                 см</div>
                   <script>
                       var inputField = document.getElementById('R_vitk');
-                      // Проверяем введенное значение на валидность при потере фокуса
                       inputField.addEventListener('blur', function(e) {
                           var min = parseFloat(this.min);
                           var max = parseFloat(this.max);
                           var value = parseFloat(this.value);
                   
-                          // Если значение меньше min или больше max, устанавливаем его равным min или max соответственно
                           if (value < min) {
                               this.value = min;
                           } else if (value > max) {
